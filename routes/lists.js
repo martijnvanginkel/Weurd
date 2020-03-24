@@ -7,38 +7,82 @@ router.get('/new', (req, res) => {
    res.render('lists/new', { list: new List() });
 });
 
+router.get('/:id', async (req, res) => {
+    const list = await List.findById(req.params.id);
+    res.render('lists/show', { list: list });
+});
+
+router.get('/edit/:id', async (req, res) => {
+    const list = await List.findById(req.params.id);
+    res.render('lists/edit', { list: list })
+})
+
 router.get('/', async (req, res) => {
-
     lists = await List.find();
-
     res.render('lists/index', { lists: lists })
 });
 
-router.post('/', async (req, res) => {
-    const words = [];
-    const langOne = req.body.langOne;
-    const langTwo = req.body.langTwo;
+router.post('/', async (req, res, next) => {
+    const list = new List();
+    req.list = list;
+    next();
+    // const words = [];
+    // if (typeof req.body.langOne === 'string') {
+    //     const word = new Word();
+    //     word.langOne = req.body.langOne;
+    //     word.langTwo = req.body.langTwo;
+    //     words.push(word);
+    // } 
+    // else {
+    //     for(const key in langOne) {
+    //         const word = new Word();
+    //         word.langOne = req.body.langOne[key];
+    //         word.langTwo = req.body.langTwo[key];
+    //         words.push(word);
+    //     }
+    // }
+    // list.name = req.body.name;
+    // list.words = words;
+    // try {
+    //     list = await list.save();
+    //     const lists = await List.find();
+    //     res.redirect('/');
+    // }
+    // catch (e) { res.send(`Error: ${e}`) }
+}, saveListAndRedirect('/'));
 
-    for(const key in langOne) {
-        const word = new Word();
-        word.langOne = langOne[key];
-        word.langTwo = langTwo[key];
-        words.push(word);
-    }
+router.put('/:id', async (req, res, next) => {
+    const list = await List.findById(req.params.id);
+    req.list = list;
+    next();
+}, saveListAndRedirect('/'));
 
-    let list = new List({
-        name: req.body.name,
-        words: words
-    })
-    try {
-        list = await list.save();
-        console.log('saved');
-        res.render('lists/index', { list: list});
+function saveListAndRedirect(path) {
+    return async (req, res) => {
+        let list = req.list;
+        let words = [];
+        if (typeof req.body.langOne === 'string') {
+            const word = new Word();
+            word.langOne = req.body.langOne;
+            word.langTwo = req.body.langTwo;
+            words.push(word);
+        }
+        else {
+            for(const key in req.body.langOne) {
+                const word = new Word();
+                word.langOne = req.body.langOne[key];
+                word.langTwo = req.body.langTwo[key];
+                words.push(word);
+            }
+        }
+        list.name = req.body.name;
+        list.words = words;
+        try {
+            list = await list.save();
+            res.redirect(path);
+        }
+        catch (e) { res.send(`Error: ${e}`) }
     }
-    catch (e) {
-        console.log('catch');
-        //res.render('lists/new', {});
-    }
-});
+}
 
 module.exports = router;

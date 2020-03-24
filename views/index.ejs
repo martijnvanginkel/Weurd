@@ -7,7 +7,12 @@
 </head>
 <body>
     <h1>index</h1>
-    <p><%= list.words[0].langOne %></p>
     <a href="/lists/new">new list</a>
+
+    <ul>
+        <% lists.forEach(list => { %>
+            <li><%= list.name %>  <a href="/lists/<%= list.id %>">show</a> <a href="/lists/edit/<%= list.id %>">Edit</a>></li>
+        <% }) %>
+    </ul>
 </body>
 </html>

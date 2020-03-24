@@ -9,13 +9,7 @@
 
     <h1>new list</h1>
     <form action="/lists" method="POST">
-        <label for="name">name</label>
-        <input type="text" name="name" id="name">
-
-        <button type="button" id="add_word_btn">Add</button>
-    
-        <a href="/">Cancel</a>
-        <button type="submit">save</button>
+        <%- include('_word_form') %>
     </form>
 
     <script src="/JS/UI.js"></script>

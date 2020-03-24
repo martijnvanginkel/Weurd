@@ -1,7 +1,7 @@
 document.querySelector('#add_word_btn').addEventListener('click', () => {
     const parent = document.querySelector('form');
     const input = document.createElement('div');
-    const add_button = document.querySelector('#add_word_btn');
+    const save_button = document.querySelector('#save_list_btn');
 
     input.className = 'word_field';
     input.innerHTML = `
@@ -11,7 +11,6 @@ document.querySelector('#add_word_btn').addEventListener('click', () => {
         <input type="text" name="langTwo">
         <button type="button" class="remove_word_btn">X</button>
     `;
-
     input.querySelector('.remove_word_btn').addEventListener('click', e => e.target.parentElement.remove());
-    parent.insertBefore(input, add_button);
+    parent.insertBefore(input, save_button);
 });

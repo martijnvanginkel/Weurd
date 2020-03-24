@@ -2,27 +2,21 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const path = require('path');
+const methodOverride = require('method-override');
+
 const List = require('./models/list');
-const Word = require('./models/word');
 const listRouter = require('./routes/lists');
-
-// const list = new List();
-// list.name = 'list one';
-
-// const word = new Word();
-// word.langOne = 'asdf';
-// word.langTwo = 'asdf2';
-
-// list.words.push(word);
 
 mongoose.connect('mongodb://localhost/word_game', { useNewUrlParser: true, useUnifiedTopology: true});
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method')); // used for other kinds of requests than get or post
 
-app.get('/', (req, res) => {
-    res.render('index', { list: list });
+app.get('/', async (req, res) => {
+    const lists = await List.find();
+    res.render('index', { lists: lists });
 });
 
 app.use('/lists', listRouter);
