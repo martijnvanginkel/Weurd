@@ -1,0 +1,17 @@
+body {
+    background-color: turquoise;
+}
+
+.list_item {
+    background-color: green;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.list_item_radio {
+    background-color: red;
+}
+
+.selected_item {
+    background-color: navy;
+}

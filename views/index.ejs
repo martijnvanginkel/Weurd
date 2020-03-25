@@ -4,15 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>index</h1>
     <a href="/lists/new">new list</a>
 
-    <ul>
+
+    <!-- <form id="list_container"> -->
+
+       
+        
         <% lists.forEach(list => { %>
-            <li><%= list.name %>  <a href="/lists/<%= list.id %>">show</a> <a href="/lists/edit/<%= list.id %>">Edit</a>></li>
+            <div class="list_item">
+                <button type="button" class="select_item_btn">select</button>
+                <span><%= list.name %></span>
+                <!-- <input type="radio" class="list_item_radio" name="list_item" value=""> -->
+                <a href="/lists/<%= list.id %>">show</a> <a href="/lists/edit/<%= list.id %>">Edit</a>
+            </div>
         <% }) %>
-    </ul>
+            
+
+        <input type="submit" value="Submit">
+    <!-- </form> -->
+
+
+
+    <!-- <ul id="list_container">
+    </ul> -->
+    <script src="/JS/UI.js"></script>
 </body>
 </html>
