@@ -8,29 +8,12 @@
 <body>
     <h1>edit</h1>
 
-
     <form action="/lists/<%= list.id %>?_method=PUT" method="POST">
-
-        <label for="name">name</label>
-        <input type="text" name="name" id="name" value="<%=list.name%> ">
-        <button type="button" id="add_word_btn">Add</button>
-        <a href="/">Cancel</a>
+        <%- include('_word_form', { list: list }) %>
         
         <% list.words.forEach(word => { %>
-
-            <div class="word_field">
-                <label>langOne</label>
-                <input type="text" name="langOne" value="<%= word.langOne %>">
-                <label>langTwo</label>
-                <input type="text" name="langTwo" value="<%= word.langTwo %>">
-            
-                <button type="button" class="remove_word_btn">Delete</button>
-            </div>
-            
-     
+            <%- include('_word_field', { word: word }) %>
         <% }) %>
-
-        <button type="submit" id="save_list_btn">save</button>
     </form>
 
     <script type="module" src="/JS/UI.js"></script>

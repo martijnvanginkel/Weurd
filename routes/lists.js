@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const fs = require('fs');
-const path = require('path');
 const List = require('./../models/list');
 const Word = require('./../models/word');
 
@@ -16,7 +14,6 @@ router.get('/:id', async (req, res) => {
 
 router.get('/edit/:id', async (req, res) => {
     const list = await List.findById(req.params.id);
-
     res.render('lists/edit', { list: list })
 })
 
@@ -34,7 +31,6 @@ router.post('/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
     const list = await List.findById(req.params.id);
     req.list = list;
-    console.log('put list');
     next();
 }, saveListAndRedirect('/'));
 
@@ -43,17 +39,16 @@ function saveListAndRedirect(path) {
         let list = req.list;
         let words = [];
         if (typeof req.body.langOne === 'string') {
-            const word = new Word();
-            word.langOne = req.body.langOne;
-            word.langTwo = req.body.langTwo;
-            words.push(word);
+            if (req.body.langOne !== '' || req.body.langTwo !== '') {        
+                words.push(createNewWord(req.body.langOne, req.body.langTwo));
+            }
         }
         else {
             for(const key in req.body.langOne) {
-                const word = new Word();
-                word.langOne = req.body.langOne[key];
-                word.langTwo = req.body.langTwo[key];
-                words.push(word);
+                if (req.body.langOne[key] === '' || req.body.langTwo[key] === '') {
+                    continue;
+                }
+                words.push(createNewWord(req.body.langOne[key], req.body.langTwo[key]));
             }
         }
         list.name = req.body.name;
@@ -64,6 +59,13 @@ function saveListAndRedirect(path) {
         }
         catch (e) { res.send(`Error: ${e}`) }
     }
+}
+
+function createNewWord(langOne, langTwo) {
+    const word = new Word();
+    word.langOne = langOne;
+    word.langTwo = langTwo;
+    return word;
 }
 
 module.exports = router;
