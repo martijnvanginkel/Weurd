@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
+const path = require('path');
 const List = require('./../models/list');
 const Word = require('./../models/word');
 
@@ -14,6 +16,7 @@ router.get('/:id', async (req, res) => {
 
 router.get('/edit/:id', async (req, res) => {
     const list = await List.findById(req.params.id);
+
     res.render('lists/edit', { list: list })
 })
 
@@ -26,34 +29,12 @@ router.post('/', async (req, res, next) => {
     const list = new List();
     req.list = list;
     next();
-    // const words = [];
-    // if (typeof req.body.langOne === 'string') {
-    //     const word = new Word();
-    //     word.langOne = req.body.langOne;
-    //     word.langTwo = req.body.langTwo;
-    //     words.push(word);
-    // } 
-    // else {
-    //     for(const key in langOne) {
-    //         const word = new Word();
-    //         word.langOne = req.body.langOne[key];
-    //         word.langTwo = req.body.langTwo[key];
-    //         words.push(word);
-    //     }
-    // }
-    // list.name = req.body.name;
-    // list.words = words;
-    // try {
-    //     list = await list.save();
-    //     const lists = await List.find();
-    //     res.redirect('/');
-    // }
-    // catch (e) { res.send(`Error: ${e}`) }
 }, saveListAndRedirect('/'));
 
 router.put('/:id', async (req, res, next) => {
     const list = await List.findById(req.params.id);
     req.list = list;
+    console.log('put list');
     next();
 }, saveListAndRedirect('/'));
 
