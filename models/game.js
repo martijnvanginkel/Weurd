@@ -6,7 +6,7 @@ const gameSchema = new mongoose.Schema({
     list: {
         type: [List.schema]
     },
-    wordArray: {
+    words: {
         type: Array,
         value: {
             word: {

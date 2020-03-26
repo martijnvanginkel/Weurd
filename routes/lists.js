@@ -15,7 +15,7 @@ router.get('/:id', async (req, res) => {
 router.get('/edit/:id', async (req, res) => {
     const list = await List.findById(req.params.id);
     res.render('lists/edit', { list: list })
-});
+})
 
 router.post('/', async (req, res, next) => {
     const list = new List();

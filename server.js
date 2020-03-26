@@ -4,7 +4,7 @@ const app = express();
 const path = require('path');
 const methodOverride = require('method-override');
 
-const Game = require('./models/game');
+// const Game = require('./models/game');
 const List = require('./models/list');
 const listRouter = require('./routes/lists');
 const gameRouter = require('./routes/games');
@@ -19,17 +19,17 @@ app.use(methodOverride('_method')); // used for other kinds of requests than get
 app.get('/', async (req, res) => {
     const lists = await List.find();
 
-    game = new Game();
-    const list = lists[0];
-    game.list = list;
-    game.wordArray = [];
+    // game = new Game();
+    // const list = lists[0];
+    // game.list = list;
+    // game.wordArray = [];
 
-    list.words.forEach((word) => {
-        game.wordArray.push({
-            word: word,
-            retries: 0
-        })
-    });
+    // list.words.forEach((word) => {
+    //     game.wordArray.push({
+    //         word: word,
+    //         retries: 0
+    //     })
+    // });
 
     res.render('index', { lists: lists });
 });

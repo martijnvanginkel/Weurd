@@ -7,5 +7,19 @@
 </head>
 <body>
     <h1>game</h1>
+
+    <form action="" method="POST">
+
+        <label for="answer"></label>
+        <input type="text" name="answer">
+
+        <button type="submit">Next</button>
+
+    </form>
+
+    <% game.words.forEach(word => { %>
+        <p> <%= word.retries %> </p>
+    <% }) %>
+   
 </body>
 </html>
