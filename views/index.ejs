@@ -10,28 +10,21 @@
     <h1>index</h1>
     <a href="/lists/new">new list</a>
 
+    <form action="/games" method="POST">
+        <input type="hidden" name="list" id="selected_list" value="">
+        <button type="submit">Play</button>
+    </form>
 
-    <!-- <form id="list_container"> -->
+    <!-- <a href="/games" id="play_btn">Play</a> -->
 
-       
-        
-        <% lists.forEach(list => { %>
-            <div class="list_item">
-                <button type="button" class="select_item_btn">select</button>
-                <span><%= list.name %></span>
-                <!-- <input type="radio" class="list_item_radio" name="list_item" value=""> -->
-                <a href="/lists/<%= list.id %>">show</a> <a href="/lists/edit/<%= list.id %>">Edit</a>
-            </div>
-        <% }) %>
+    <% lists.forEach(list => { %>
+        <div class="list_item">
+            <button type="button" class="select_item_btn" id="<%= list.id %>">select</button>
+            <span><%= list.name %></span>
+            <a href="/lists/<%= list.id %>">show</a> <a href="/lists/edit/<%= list.id %>">Edit</a>
+        </div>
+    <% }) %>
             
-
-        <input type="submit" value="Submit">
-    <!-- </form> -->
-
-
-
-    <!-- <ul id="list_container">
-    </ul> -->
     <script src="/JS/UI.js"></script>
 </body>
 </html>

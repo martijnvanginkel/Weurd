@@ -26,15 +26,12 @@ const select_buttons = document.querySelectorAll('.select_item_btn');
 select_buttons.forEach(button => button.addEventListener('click', (e) => {
     if (document.querySelector('.selected_item') !== null) {
         const parent = document.querySelector('.selected_item');
-        console.log(parent);
         const child =  parent.querySelector('.select_item_btn');
-        console.log(child);
+        const selected_list = document.querySelector('#selected_list');
         child.innerHTML = `unselected`;
-       // parent.querySelector('.selected_item_btn').innerHTML = `selected`;
-        // console.log(btn_child);
         parent.classList.remove('selected_item');
+        selected_list.value = e.target.id;
     }
     e.target.parentElement.classList.add('selected_item');
     e.target.innerHTML = `selected`;
 }))
-

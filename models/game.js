@@ -14,6 +14,9 @@ const gameSchema = new mongoose.Schema({
             },
             retries: {
                 type: Number
+            },
+            passed: {
+                type: Boolean
             }
         }
     }
