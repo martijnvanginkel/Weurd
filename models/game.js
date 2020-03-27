@@ -3,22 +3,26 @@ const List = require('./list');
 const Word = require('./word');
 
 const gameSchema = new mongoose.Schema({
-    list: {
-        type: [List.schema]
+    list_id: {
+        type: String
+    },
+    test: {
+        type: Number
     },
     words: {
         type: Array,
-        value: {
-            word: {
-                type: [Word.schema]
-            },
-            retries: {
-                type: Number
-            },
-            passed: {
-                type: Boolean
-            }
-        }
+        test2: {
+            type: Number
+        },
+        word: {
+            type: [Word.schema]
+        },
+        retries: {
+            type: Number
+        },
+        passed: {
+            type: Boolean
+        }   
     }
 });
 

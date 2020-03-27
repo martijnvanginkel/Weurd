@@ -57,9 +57,12 @@ function saveListAndRedirect(path) {
 }
 
 function createNewWord(langOne, langTwo) {
-    const word = new Word();
-    word.langOne = langOne;
-    word.langTwo = langTwo;
+    const word = new Word({
+        langOne: langOne,
+        langTwo: langTwo
+    });
+    // word.langOne = langOne;
+    // word.langTwo = langTwo;
     return word;
 }
 

@@ -8,7 +8,10 @@ const methodOverride = require('method-override');
 const List = require('./models/list');
 const listRouter = require('./routes/lists');
 const gameRouter = require('./routes/games');
+
+const listApiRouter = require('./routes/api/lists');
 const gameApiRouter = require('./routes/api/games');
+
 
 mongoose.connect('mongodb://localhost/word_game', { useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -38,6 +41,7 @@ app.get('/', async (req, res) => {
 
 app.use('/lists', listRouter);
 app.use('/games', gameRouter);
+app.use('/api/lists', listApiRouter);
 app.use('/api/games', gameApiRouter);
 
 app.listen(5000, () => console.log('server running'));

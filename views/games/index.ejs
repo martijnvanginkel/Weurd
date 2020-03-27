@@ -8,10 +8,12 @@
 <body>
     <h1>game</h1>
 
-    <h3> <%= list.name %> </h3>
+    <h1>list_name; <%= game.words[0].retries %> </h1>
 
-    <input type="hidden" value="<%= list.id %>" id="list_id">
+    <label for="answer_input"></label>
     <input type="hidden" value="<%= game.id %>" id="game_id">
+    <input type="text" name="answer_input" value="" id="answer_input">
+    <button type="button" id="next_btn">Next</button>
 
    
     <script src="/JS/GameController.js"></script>
