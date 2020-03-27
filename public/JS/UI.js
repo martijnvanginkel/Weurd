@@ -27,11 +27,11 @@ select_buttons.forEach(button => button.addEventListener('click', (e) => {
     if (document.querySelector('.selected_item') !== null) {
         const parent = document.querySelector('.selected_item');
         const child =  parent.querySelector('.select_item_btn');
-        const selected_list = document.querySelector('#selected_list');
+        const play_btn = document.querySelector('#play_btn');
         child.innerHTML = `unselected`;
         parent.classList.remove('selected_item');
-        selected_list.value = e.target.id;
+        play_btn.href = `${play_btn.href}${e.target.id}`;
     }
     e.target.parentElement.classList.add('selected_item');
     e.target.innerHTML = `selected`;
-}))
+}));

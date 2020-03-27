@@ -8,18 +8,12 @@
 <body>
     <h1>game</h1>
 
-    <form action="" method="POST">
+    <h3> <%= list.name %> </h3>
 
-        <label for="answer"></label>
-        <input type="text" name="answer">
+    <input type="hidden" value="<%= list.id %>" id="list_id">
+    <input type="hidden" value="<%= game.id %>" id="game_id">
 
-        <button type="submit">Next</button>
-
-    </form>
-
-    <% game.words.forEach(word => { %>
-        <p> <%= word.retries %> </p>
-    <% }) %>
    
+    <script src="/JS/GameController.js"></script>
 </body>
 </html>
