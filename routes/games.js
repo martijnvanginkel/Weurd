@@ -27,6 +27,8 @@ const makeGameFromList = async (list) => {
         })
     })
 
+    game.words[0].passed = true;
+
     game = await game.save();
     console.log(`saved game: ${game}`);
 

@@ -11,6 +11,7 @@ const gameRouter = require('./routes/games');
 
 const listApiRouter = require('./routes/api/lists');
 const gameApiRouter = require('./routes/api/games');
+const wordApiRouter = require('./routes/api/words');
 
 
 mongoose.connect('mongodb://localhost/word_game', { useNewUrlParser: true, useUnifiedTopology: true});
@@ -43,5 +44,6 @@ app.use('/lists', listRouter);
 app.use('/games', gameRouter);
 app.use('/api/lists', listApiRouter);
 app.use('/api/games', gameApiRouter);
+app.use('/api/words', wordApiRouter);
 
 app.listen(5000, () => console.log('server running'));

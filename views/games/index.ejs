@@ -10,7 +10,8 @@
 
     <h1>list_name; <%= game.words[0].retries %> </h1>
 
-    <label for="answer_input"></label>
+    <label for="answer_input" id="answer_label"></label>
+    <!-- <input type="hidden" value="" id="word_id"> -->
     <input type="hidden" value="<%= game.id %>" id="game_id">
     <input type="text" name="answer_input" value="" id="answer_input">
     <button type="button" id="next_btn">Next</button>
