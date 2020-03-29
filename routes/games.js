@@ -19,6 +19,7 @@ const makeGameFromList = async (list) => {
     let game = new Game();
 
     game.list_id = list.id;
+    game.direction = true;
     list.words.forEach(word => {
         game.words.push({
             word: word,
@@ -27,7 +28,7 @@ const makeGameFromList = async (list) => {
         })
     })
 
-    game.words[0].passed = true;
+    //game.words[0].passed = true;
 
     game = await game.save();
     console.log(`saved game: ${game}`);

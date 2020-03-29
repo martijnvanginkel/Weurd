@@ -52,9 +52,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+const checkIfAnswerMatches = async (game, word) => {
+
+
+
+    if (game.direction === true) {
+
+        //console.log(game);
+        word.passed = true;
+        console.log(game);
+    }
+    else {
+
+    }
+
+}
+
 document.querySelector('#next_btn').addEventListener('click', (e) => {
     const game_id = document.querySelector('#game_id').value;
-    // const word_id = document.querySelector('#word_id').value;
     const answer_label = document.querySelector('#answer_label').innerHTML;
     const answer_input = document.querySelector('#answer_input').value;
 
@@ -62,24 +77,36 @@ document.querySelector('#next_btn').addEventListener('click', (e) => {
     .then(function(response) {
         return response.json();
     })
-    .then(function(myJson) {
-        const new_words = myJson.words;
+    .then(function(game) {
+        const words = game.words;
 
-        console.log(answer_label);
-        console.log(answer_input);
-        console.log(new_words);
+        for (const index in words) {
 
-        for (const value in new_words) {
-
-            console.log(new_words[value].word.langOne);
-            if (new_words[value].word.langOne === answer_label) {
+            
+            if (words[index].word.langOne === answer_label) {
                 
-                // if (word.langTwo === answer_input) {
-                    console.log('match');
-                    console.log(new_words[value].word.langTwo)
-                    break;
-                // }
+                console.log('match');
+                game.direction = false;
+                // game.words[index].word.passed = true;
+                //console.log(game.words[index].word.passed);
 
+                fetch(`http://localhost:5000/api/games/update/${game_id}/word/${game_id}`, {
+                    headers: { "Content-Type": "application/json; charset=utf-8" },
+                    method: 'PUT',
+                    body: JSON.stringify(game)
+                })
+                .then(function(response) {
+                    return response.json();
+                }).then(function(game) {
+                    //console.log(game);
+                })//, {
+                //     headers: { "Content-Type": "application/json; charset=utf-8" },
+                //     method: 'PUT',
+                //     body: JSON.stringify(game)
+                // })
+
+
+                break;
             }
         }
     });

@@ -6,14 +6,11 @@ const gameSchema = new mongoose.Schema({
     list_id: {
         type: String
     },
-    test: {
-        type: Number
+    direction: {
+        type: Boolean
     },
     words: {
         type: Array,
-        test2: {
-            type: Number
-        },
         word: {
             type: [Word.schema]
         },
