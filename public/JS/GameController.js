@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(function(myJson) {
         //console.log(myJson.words);
         const word = findNewWord(myJson.words)
+        console.log('word_id:');
+        console.log(word.word);
         //console.log(word);
         //const word_id = document.querySelector('#word_id');
         // console.log(word.word._id);
@@ -90,7 +92,7 @@ document.querySelector('#next_btn').addEventListener('click', (e) => {
                 // game.words[index].word.passed = true;
                 //console.log(game.words[index].word.passed);
 
-                fetch(`http://localhost:5000/api/games/update/${game_id}/word/${game_id}`, {
+                fetch(`http://localhost:5000/api/games/update/${game_id}/word/${words[index].word._id}`, {
                     headers: { "Content-Type": "application/json; charset=utf-8" },
                     method: 'PUT',
                     body: JSON.stringify(game)

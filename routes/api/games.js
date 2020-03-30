@@ -15,11 +15,16 @@ router.get('/:id', async (req, res) => {
 //     console.log(value.word._id);
 // }
 
-function startsWith(wordToCompare) {
-    return function(element) {
-        console.log(wordToCompare);
-        console.log(element);
-        //return element.indexOf(wordToCompare) === 0;
+const findMatchingWordID = (word_id) => {
+    return (value) => {
+        // if (word_id === value.retries) {
+        //     return true;
+        // }
+        console.log(word_id);
+        console.log(value.word._id);
+
+        //console.log(word_id);
+        //console.log(value.word._id);
     }
 }
 
@@ -27,31 +32,22 @@ router.put('/update/:id/word/:word_id', async (req, res) => {
     console.log('game put req');
     try {
         let game = await Game.findById(req.params.id);
+        let words = game.words;
+
+        //game.words[0].retries = 1;
+
+        // console.log(words[0].word._id);
+
+        // console.log('games word udpate');
+        //console.log(words);
+        words = game.words.filter(findMatchingWordID(req.params.word_id));
+        //console.log(words);
 
 
-        // // game.direction = false;
-        // game.words[0].passed = true;
-        //await game.save();
-
-        //const word = game.words.filter(filterOnValue);
-
-
-
-        game.words.filter(startsWith(2));
-
-
-
-
-        //words.find( {retries: 0} );
-
-        //find({awards: {$elemMatch: {award:'National Medal', year:1975}}})
-
-        //let words = await Game.findById(req.params.id).find( { words: {$elemMatch: {passed: true} } } )
 
         
 
         console.log('saved');
-        // console.log(game.words);
         // res.json(game);
     } catch (error) {
         res.status(500).json({ message: error.message })
