@@ -8,11 +8,11 @@
 <body>
     <h1>game</h1>
 
-    <h1>list_name; <%= game.words[0].retries %> </h1>
+    <!-- <h1><%= word.word.langOne %> </h1> -->
 
-    <label for="answer_input" id="answer_label"></label>
-    <!-- <input type="hidden" value="" id="word_id"> -->
-    <input type="hidden" value="<%= game.id %>" id="game_id">
+    <label for="answer_input" id="answer_label"><%= word.word.langOne %></label>
+    <input type="hidden" id="word_id" value="<%= word.word._id %>">
+    <input type="hidden" id="game_id" value="<%= game.id %>">
     <input type="text" name="answer_input" value="" id="answer_input">
     <button type="button" id="next_btn">Next</button>
 

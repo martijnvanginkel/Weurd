@@ -18,24 +18,12 @@ mongoose.connect('mongodb://localhost/word_game', { useNewUrlParser: true, useUn
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method')); // used for other kinds of requests than get or post
 app.use(express.json());
 
 app.get('/', async (req, res) => {
     const lists = await List.find();
-
-    // game = new Game();
-    // const list = lists[0];
-    // game.list = list;
-    // game.wordArray = [];
-
-    // list.words.forEach((word) => {
-    //     game.wordArray.push({
-    //         word: word,
-    //         retries: 0
-    //     })
-    // });
 
     res.render('index', { lists: lists });
 });
