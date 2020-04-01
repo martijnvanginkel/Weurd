@@ -11,60 +11,51 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-const findWordInList = (word_id) => {
+const findWordById = (word_id) => {
     return (value) => word_id == value.word._id;
 }
 
-const checkAnswer = () => {
-
+const checkAnswer = (word, answer) => {
+    if (word.word.langTwo === answer) {
+        word.passed = true;
+    }
+    else {
+        word.retries++;
+    }
 }
+
+const filterOnUnpassed = (word) => word.passed === false;
+
+const getRandomWord = (words) => words[Math.floor((Math.random() * words.length))]
 
 router.put('/update/:id/word/:word_id', async (req, res) => {
     try {
 
         const answer = req.body.answer;
         let game = await Game.findById(req.params.id);
-        let word = game.words.find(findWordInList(req.params.word_id));
+        let word = game.words.find(findWordById(req.params.word_id));
 
- 
+        checkAnswer(word, answer);
+        game.words = game.words.filter(filterOnUnpassed);
+        if (game.words.length === 0) {
+            // game = await game.save();
+            // render result page
+        }
 
-        console.log(game);
+        // needs to be a check for no words left
+
+        const new_word = getRandomWord(game.words.filter(filterOnUnpassed))
+
+        console.log(new_word);
+        // console.log(getRandomWord(game.words))
 
         game.markModified('words');
         await game.save();
 
         let game2 = await Game.findById(req.params.id);
 
-        console.log('hoi' + game2);
-        //console.log(game.words[0]);
-        //let word = game.words.find(findWordInList(req.params.word_id)).retries = 4;
+        //console.log('saved' + game2);
 
-        // console.log(`game1 : ${game}`);
-
-        // // Check answer
-        // // if (word.word.langTwo === answer) {
-        // //     console.log('answer is correct');
-        // // }
-        // // else {
-        // //     console.log('answer is incorrect');
-        // //     word.retries++;
-        // // }
-        // // word.retries = 3;
-        // game.direction = false;
-        // await game.save();
-
-        // let game2 = await Game.findById(req.params.id);
-
-        // console.log(`game2: ${game2}`);
-
-        // // word.retries = 3;
-        
-        
-        
-        // // game = await game.save();
-        
-
-        // // console.log(game);
 
         // console.log('saved');
         // res.json(word);
