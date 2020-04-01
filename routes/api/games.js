@@ -15,33 +15,59 @@ const findWordInList = (word_id) => {
     return (value) => word_id == value.word._id;
 }
 
+const checkAnswer = () => {
+
+}
+
 router.put('/update/:id/word/:word_id', async (req, res) => {
-    console.log('game put req');
     try {
 
-        console.log(req.params.id)
-        console.log(req.params.word_id);
+        const answer = req.body.answer;
         let game = await Game.findById(req.params.id);
-
-        console.log(req.body.input);
-        // let words = game.words;
-
-        // console.log(game);
-
-
-
-        // const word = game.words.find(findMatchingWordID(req.params.word_id));
-
-
         let word = game.words.find(findWordInList(req.params.word_id));
 
+ 
 
+        console.log(game);
+
+        game.markModified('words');
+        await game.save();
+
+        let game2 = await Game.findById(req.params.id);
+
+        console.log('hoi' + game2);
+        //console.log(game.words[0]);
+        //let word = game.words.find(findWordInList(req.params.word_id)).retries = 4;
+
+        // console.log(`game1 : ${game}`);
+
+        // // Check answer
+        // // if (word.word.langTwo === answer) {
+        // //     console.log('answer is correct');
+        // // }
+        // // else {
+        // //     console.log('answer is incorrect');
+        // //     word.retries++;
+        // // }
+        // // word.retries = 3;
+        // game.direction = false;
         // await game.save();
 
-        // console.log(game);
+        // let game2 = await Game.findById(req.params.id);
 
-        console.log('saved');
-        res.json(word);
+        // console.log(`game2: ${game2}`);
+
+        // // word.retries = 3;
+        
+        
+        
+        // // game = await game.save();
+        
+
+        // // console.log(game);
+
+        // console.log('saved');
+        // res.json(word);
     } catch (error) {
         res.status(500).json({ message: error.message })
     }   

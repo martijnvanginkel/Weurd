@@ -3,11 +3,6 @@ const router = express.Router();
 const List = require('./../models/list');
 const Game = require('./../models/game');
 
-
-// Game wordt geladen, laad de pagina met de game en met het woord, 2 variabelen
-// Op het klikken van next wordt de (game?) en het woord meegestuurd naar een checker functie
-// Deze checker functie kijkt of het woord overeenkomt met het antwoord, zo niet dan update hij de retries, zo ja dan update hij 
-
 router.get('/:id', async (req, res) => {
     try {
         const list = await List.findById(req.params.id);
