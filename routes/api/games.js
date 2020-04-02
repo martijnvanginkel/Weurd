@@ -22,43 +22,35 @@ const checkAnswer = (word, answer) => {
     else {
         word.retries++;
     }
+    return word;
 }
 
 const filterOnUnpassed = (word) => word.passed === false;
 
-const getRandomWord = (words) => words[Math.floor((Math.random() * words.length))]
+const getRandomWord = (words) => words[Math.floor((Math.random() * words.length))];
 
 router.put('/update/:id/word/:word_id', async (req, res) => {
     try {
 
-        const answer = req.body.answer;
+        const answer = await req.body.answer;
         let game = await Game.findById(req.params.id);
         let word = game.words.find(findWordById(req.params.word_id));
 
-        checkAnswer(word, answer);
-        game.words = game.words.filter(filterOnUnpassed);
-        if (game.words.length === 0) {
-            // game = await game.save();
-            // render result page
-        }
-
-        // needs to be a check for no words left
-
-        const new_word = getRandomWord(game.words.filter(filterOnUnpassed))
-
-        console.log(new_word);
-        // console.log(getRandomWord(game.words))
-
+        word = checkAnswer(word, answer);
         game.markModified('words');
-        await game.save();
-
-        let game2 = await Game.findById(req.params.id);
-
-        //console.log('saved' + game2);
-
-
-        // console.log('saved');
-        // res.json(word);
+        game = await game.save();
+        game.words = game.words.filter(filterOnUnpassed);
+        
+        //res.status(204);
+        if (game.words.length === 0) {
+            console.log('end');
+            res.json();
+        }
+        else {
+            console.log('next word');
+            const new_word = getRandomWord(game.words.filter(filterOnUnpassed));
+            res.json(new_word);
+        }
     } catch (error) {
         res.status(500).json({ message: error.message })
     }   
