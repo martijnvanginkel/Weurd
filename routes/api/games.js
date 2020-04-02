@@ -45,7 +45,9 @@ router.put('/update/:id/word/:word_id', async (req, res) => {
         }
         else {
             const new_word = getRandomWord(game.words.filter(filterOnUnpassed));
-            res.json(new_word);
+            res.json({new_word: new_word,
+                    old_passed: word.passed,
+                    old_answer: word.langTwo });
         }
     } catch (error) {
         res.status(500).json({ message: error.message })

@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const path = require('path');
+const http = require('http'); // for future .env file
 const methodOverride = require('method-override');
 
 // const Game = require('./models/game');
@@ -13,7 +14,6 @@ const listApiRouter = require('./routes/api/lists');
 const gameApiRouter = require('./routes/api/games');
 const wordApiRouter = require('./routes/api/words');
 
-
 mongoose.connect('mongodb://localhost/word_game', { useNewUrlParser: true, useUnifiedTopology: true});
 
 app.set('view engine', 'ejs');
@@ -24,7 +24,6 @@ app.use(express.json());
 
 app.get('/', async (req, res) => {
     const lists = await List.find();
-
     res.render('index', { lists: lists });
 });
 
