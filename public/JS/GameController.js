@@ -1,19 +1,72 @@
+const flickEmptyField = (input_field) => {
+    input_field.classList.add('yellow_alert');
+    setTimeout(() => {
+        input_field.classList.remove('yellow_alert');
+        input_field.select();
+    }, 300)
+}
+
+function timeout() {
+    return new Promise(resolve => setTimeout(resolve, 1000));
+}
+
+const flickWrongField = async (input_field) => {
+    // cheat_div.innerHTML = answer;//new_word.old_answer;
+    input_field.classList.add('red_alert');
+
+    
+
+    await timeout(() => {
+
+    });
+    input_field.classList.remove('red_alert');
+    input_field.select();
+    // setTimeout(() => {
+        //answer_input.value = '';
+        // cheat_div.innerHTML = '';
+        //callback();
+    // }, 1000)
+}
+
+
+const checkForWrongAnswer = async (input, new_word, callback) => {
+    const cheat_div = document.querySelector('#cheat_div');
+
+    if (new_word.old_passed === false) {
+        
+        // cheat_div.innerHTML = new_word.old_answer;
+        console.log(cheat_div)
+        console.log(new_word)
+        cheat_div.innerHTML = new_word.old_answer;
+        await flickWrongField(input);
+        cheat_div.innerHTML = '';
+        console.log('didnt pass');
+    }
+    callback();
+
+}
+
+// const setupNewWord = (answer_input, new_word, word_id) => {
+//     const answer_label = document.querySelector('#answer_label');
+
+//     answer_label.innerHTML = new_word.new_word.word.langOne;
+//     word_id.value = new_word.new_word.word._id;
+//     answer_input.value = '';
+//     answer_input.select();
+// }
+
+
 document.querySelector('#next_btn').addEventListener('click', (e) => {
     const game_id = document.querySelector('#game_id');
     const word_id = document.querySelector('#word_id');
     const answer_label = document.querySelector('#answer_label');
     const answer_input = document.querySelector('#answer_input');
-    const cheat_div = document.querySelector('#cheat_div');
+    // const cheat_div = document.querySelector('#cheat_div');
 
     // Flick empty answer_input
     if (answer_input.value == '')
     {
-        console.log('empty field');
-        answer_input.classList.add('yellow_alert');
-        setTimeout(() => {
-            answer_input.classList.remove('yellow_alert');
-            answer_input.select();
-        }, 300)
+        flickEmptyField(answer_input);
         return ;
     }
 
@@ -22,37 +75,31 @@ document.querySelector('#next_btn').addEventListener('click', (e) => {
         method: 'PUT',
         body: JSON.stringify({ answer: answer_input.value })
     }).then(response =>  {
-        // console.log(response.json);
         return response.json()
     })
-    .then((new_word) => {
+    .then( (new_word) => {
 
-        // console.log(new_word);
+        // if (new_word.old_passed === false) {
 
-        if (new_word.old_passed === false) {
-            // console.log('this');
-            console.log(new_word.old_answer);
-            cheat_div.innerHTML = new_word.old_answer;
-            // show alert from answer_input
-            answer_input.classList.add('red_alert');
-            answer_label.innerHTML = new_word.old_answer;
+        //     // cheat_div.innerHTML = new_word.old_answer;
 
+        //     flickWrongField(answer_input, cheat_div, new_word.old_answer);
 
-            // Maybe a callback function that triggers a 'clean input field function'
-            setTimeout(() => {
-                //answer_input.value = '';
-                cheat_div.innerHTML = '';
-                answer_input.classList.remove('red_alert');
-                answer_input.select();
-            }, 1000)
+        //     console.log('didnt pass');
+        // }
+        checkForWrongAnswer(answer_input, new_word, function() {
+            console.log('callack');
+            answer_label.innerHTML = new_word.new_word.word.langOne;
+            word_id.value = new_word.new_word.word._id;
+            answer_input.value = '';
+            answer_input.select();
+        });
 
-            console.log('didnt pass');
-        }
         
-        answer_label.innerHTML = new_word.new_word.word.langOne;
-        word_id.value = new_word.new_word.word._id;
-        answer_input.value = '';
-        answer_input.select();
+        // answer_label.innerHTML = new_word.new_word.word.langOne;
+        // word_id.value = new_word.new_word.word._id;
+        // answer_input.value = '';
+        // answer_input.select();
 
 
     }).catch(() => window.location.href = `http://localhost:5000/games/results/${game_id.value}`);
