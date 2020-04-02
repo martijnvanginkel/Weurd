@@ -3,6 +3,7 @@ document.querySelector('#next_btn').addEventListener('click', (e) => {
     const word_id = document.querySelector('#word_id');
     const answer_label = document.querySelector('#answer_label');
     const answer_input = document.querySelector('#answer_input');
+    const cheat_div = document.querySelector('#cheat_div');
 
     // Flick empty answer_input
     if (answer_input.value == '')
@@ -26,12 +27,24 @@ document.querySelector('#next_btn').addEventListener('click', (e) => {
     })
     .then((new_word) => {
 
-        console.log(new_word);
+        // console.log(new_word);
 
         if (new_word.old_passed === false) {
-
+            // console.log('this');
+            console.log(new_word.old_answer);
+            cheat_div.innerHTML = new_word.old_answer;
             // show alert from answer_input
+            answer_input.classList.add('red_alert');
+            answer_label.innerHTML = new_word.old_answer;
 
+
+            // Maybe a callback function that triggers a 'clean input field function'
+            setTimeout(() => {
+                //answer_input.value = '';
+                cheat_div.innerHTML = '';
+                answer_input.classList.remove('red_alert');
+                answer_input.select();
+            }, 1000)
 
             console.log('didnt pass');
         }
