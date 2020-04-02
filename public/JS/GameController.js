@@ -4,6 +4,18 @@ document.querySelector('#next_btn').addEventListener('click', (e) => {
     const answer_label = document.querySelector('#answer_label');
     const answer_input = document.querySelector('#answer_input');
 
+    // Flick empty answer_input
+    if (answer_input.value == '')
+    {
+        console.log('empty field');
+        answer_input.classList.add('yellow_alert');
+        setTimeout(() => {
+            answer_input.classList.remove('yellow_alert');
+            answer_input.select();
+        }, 300)
+        return ;
+    }
+
     fetch(`http://localhost:5000/api/games/update/${game_id.value}/word/${word_id.value}`, {
         headers: { "Content-Type": "application/json; charset=utf-8" },
         method: 'PUT',
@@ -17,6 +29,10 @@ document.querySelector('#next_btn').addEventListener('click', (e) => {
         console.log(new_word);
 
         if (new_word.old_passed === false) {
+
+            // show alert from answer_input
+
+
             console.log('didnt pass');
         }
         

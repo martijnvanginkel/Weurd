@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
     <title>Document</title>
 </head>
 <body>
@@ -11,7 +12,7 @@
     <label for="answer_input" id="answer_label"><%= word.word.langOne %></label>
     <input type="hidden" id="word_id" value="<%= word.word._id %>">
     <input type="hidden" id="game_id" value="<%= game.id %>">
-    <input type="text" name="answer_input" value="" id="answer_input">
+    <input type="text" class="" name="answer_input" value="" id="answer_input">
     <button type="button" id="next_btn">Next</button>
    
     <script src="/JS/GameController.js"></script>

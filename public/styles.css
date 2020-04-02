@@ -15,3 +15,11 @@ body {
 .selected_item {
     background-color: navy;
 }
+
+.red_alert {
+    background-color: red;
+}
+
+.yellow_alert {
+    background-color: yellow;
+}
