@@ -8,13 +8,8 @@ document.querySelector('#next_btn').addEventListener('click', (e) => {
         headers: { "Content-Type": "application/json; charset=utf-8" },
         method: 'PUT',
         body: JSON.stringify({ answer: answer_input.value })
-    }).then(response => {
-        return response.json();
-    })
-    .then(new_word => {
+    }).then(response => response.json()).then(new_word => {
         answer_label.innerHTML = new_word.word.langOne
         word_id.value = new_word.word._id;
-    }).catch(() => {
-        console.log('error');
-    });
+    }).catch(() => window.location.href = `http://localhost:5000/games/results/${game_id.value}`);
 });

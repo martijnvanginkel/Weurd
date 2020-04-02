@@ -31,7 +31,6 @@ const getRandomWord = (words) => words[Math.floor((Math.random() * words.length)
 
 router.put('/update/:id/word/:word_id', async (req, res) => {
     try {
-
         const answer = await req.body.answer;
         let game = await Game.findById(req.params.id);
         let word = game.words.find(findWordById(req.params.word_id));
@@ -40,14 +39,11 @@ router.put('/update/:id/word/:word_id', async (req, res) => {
         game.markModified('words');
         game = await game.save();
         game.words = game.words.filter(filterOnUnpassed);
-        
-        //res.status(204);
         if (game.words.length === 0) {
             console.log('end');
             res.json();
         }
         else {
-            console.log('next word');
             const new_word = getRandomWord(game.words.filter(filterOnUnpassed));
             res.json(new_word);
         }

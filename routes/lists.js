@@ -4,6 +4,7 @@ const List = require('./../models/list');
 const Word = require('./../models/word');
 
 router.get('/new', (req, res) => {
+    console.log('new list');
    res.render('lists/new', { list: new List() });
 });
 

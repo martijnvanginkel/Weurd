@@ -4,8 +4,9 @@ const List = require('./../models/list');
 const Game = require('./../models/game');
 
 router.get('/results/:id', async (req, res) => {
-    const game = Game.findById(req.params.id);
-    res.render('games/result', { game: game});
+    const game = await Game.findById(req.params.id);
+    console.log(game.words)
+    res.render('games/result', { game: game });
 });
 
 router.get('/new', (req, res) => {
