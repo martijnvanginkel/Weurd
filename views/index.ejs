@@ -7,17 +7,33 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>index</h1>
-    <a href="/lists/new">new list</a>
 
-    <% lists.forEach(list => { %>
-        <div class="list_item">
-            <span><%= list.name %></span>
-            <button type="button" class="remove_list_btn" value="<%= list.id %>">Remove</button>
-            <a href="/lists/edit/<%= list.id %>">Edit</a>
-            <a href="/games/<%= list.id %>" id="play_btn">Play</a>
+
+
+    <div class="container">
+
+        <h1 class="main_title">index</h1>
+        <a href="/lists/new" id="new_list_btn">new list</a>
+    
+        <div class="list_container">
+
+            <% lists.forEach(list => { %>
+                <div class="list_item">
+                    <span class="list_item_name"><%= list.name %></span>
+                    <button type="button" class="remove_list_btn" value="<%= list.id %>">Remove</button>
+                    <a href="/lists/edit/<%= list.id %>">Edit</a>
+                    <a href="/games/<%= list.id %>" id="play_btn">Play</a>
+                </div>
+            <% }) %>
+
         </div>
-    <% }) %>
+
+        <footer>
+            Martijn van Ginkel
+        </footer>
+
+    </div>
+
             
     <script src="/JS/UI.js"></script>
 </body>
