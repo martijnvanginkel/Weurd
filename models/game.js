@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const List = require('./list');
 const Word = require('./word');
 
 const gameSchema = new mongoose.Schema({

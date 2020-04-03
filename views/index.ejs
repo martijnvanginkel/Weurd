@@ -12,9 +12,9 @@
 
     <% lists.forEach(list => { %>
         <div class="list_item">
-            <button type="button" class="select_item_btn" id="<%= list.id %>">select</button>
             <span><%= list.name %></span>
-            <a href="/lists/<%= list.id %>">show</a><a href="/lists/edit/<%= list.id %>">Edit</a>
+            <button type="button" class="remove_list_btn" value="<%= list.id %>">Remove</button>
+            <a href="/lists/edit/<%= list.id %>">Edit</a>
             <a href="/games/<%= list.id %>" id="play_btn">Play</a>
         </div>
     <% }) %>

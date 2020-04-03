@@ -29,10 +29,10 @@ const filterOnUnpassed = (word) => word.passed === false;
 
 const getRandomWord = (words) => words[Math.floor((Math.random() * words.length))];
 
-router.put('/update/:id/word/:word_id', async (req, res) => {
+router.put('/update/:game_id/word/:word_id', async (req, res) => {
     try {
         const answer = await req.body.answer;
-        let game = await Game.findById(req.params.id);
+        let game = await Game.findById(req.params.game_id);
         let word = game.words.find(findWordById(req.params.word_id));
 
         word = checkAnswer(word, answer);
@@ -40,14 +40,13 @@ router.put('/update/:id/word/:word_id', async (req, res) => {
         game = await game.save();
         game.words = game.words.filter(filterOnUnpassed);
         if (game.words.length === 0) {
-            console.log('end');
             res.json();
         }
         else {
             const new_word = getRandomWord(game.words.filter(filterOnUnpassed));
-            res.json({new_word: new_word,
-                    old_passed: word.passed,
-                    old_answer: word.word.langTwo });
+            res.json({  new_word: new_word,
+                        old_answer_passed: word.passed,
+                        old_answer: word.word.langTwo });
         }
     } catch (error) {
         res.status(500).json({ message: error.message })

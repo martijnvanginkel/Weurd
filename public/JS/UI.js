@@ -17,21 +17,20 @@ if (document.querySelector('#add_word_btn') !== null) {
     });
 }
 
-const remove_buttons = document.querySelectorAll('.remove_word_btn')
-for (const button of remove_buttons) {
+const remove_word_btns = document.querySelectorAll('.remove_word_btn')
+for (const button of remove_word_btns) {
     button.addEventListener('click', e => e.target.parentElement.remove());
 }
 
-const select_buttons = document.querySelectorAll('.select_item_btn');
-select_buttons.forEach(button => button.addEventListener('click', (e) => {
-    if (document.querySelector('.selected_item') !== null) {
-        const parent = document.querySelector('.selected_item');
-        const child =  parent.querySelector('.select_item_btn');
-        const play_btn = document.querySelector('#play_btn');
-        child.innerHTML = `unselected`;
-        parent.classList.remove('selected_item');
-        play_btn.href = `${play_btn.href}${e.target.id}`;
-    }
-    e.target.parentElement.classList.add('selected_item');
-    e.target.innerHTML = `selected`;
-}));
+const remove_list_btns = document.querySelectorAll('.remove_list_btn')
+for (const button of remove_list_btns) {
+    button.addEventListener('click', e => {
+        const list_id = e.target.value;
+        fetch(`http://localhost:5000/api/lists/${list_id}`, {
+            method: 'DELETE',
+        })
+        .then(response => response.json()).then(response => {
+            e.target.parentElement.remove();
+        }).catch(() => { })
+    });
+}

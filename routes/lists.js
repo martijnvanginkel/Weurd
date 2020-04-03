@@ -4,13 +4,7 @@ const List = require('./../models/list');
 const Word = require('./../models/word');
 
 router.get('/new', (req, res) => {
-    console.log('new list');
    res.render('lists/new', { list: new List() });
-});
-
-router.get('/:id', async (req, res) => {
-    const list = await List.findById(req.params.id);
-    res.render('lists/show', { list: list });
 });
 
 router.get('/edit/:id', async (req, res) => {
@@ -62,8 +56,6 @@ function createNewWord(langOne, langTwo) {
         langOne: langOne,
         langTwo: langTwo
     });
-    // word.langOne = langOne;
-    // word.langTwo = langTwo;
     return word;
 }
 

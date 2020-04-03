@@ -2,7 +2,6 @@ const waitForTimer = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 const flickInputField = async (field, color, time) => {
     field.classList.add(`${color}_alert`);
-
     await waitForTimer(time);
     field.classList.remove(`${color}_alert`);
     field.select();
@@ -20,7 +19,8 @@ const setupNextWord = (answer_input, new_word, word_id) => {
 const checkForWrongAnswer = async (input, new_word, word_id, callback) => {
     const cheat_div = document.querySelector('#cheat_div');
 
-    if (new_word.old_passed === false) {    
+    if (new_word.old_answer_passed === false) {
+        
         cheat_div.innerHTML = new_word.old_answer;
         await flickInputField(input, 'red', 1500);
         cheat_div.innerHTML = '';
@@ -37,6 +37,7 @@ document.querySelector('#next_btn').addEventListener('click', (e) => {
         flickInputField(input_field, 'yellow', 500);
         return ;
     }
+
     fetch(`http://localhost:5000/api/games/update/${game_id.value}/word/${word_id.value}`, {
         headers: { "Content-Type": "application/json; charset=utf-8" },
         method: 'PUT',
