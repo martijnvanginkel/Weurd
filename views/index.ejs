@@ -10,13 +10,6 @@
     <h1>index</h1>
     <a href="/lists/new">new list</a>
 
-    <!-- <form action="/games" method="POST">
-        <input type="hidden" name="list" id="selected_list" value="">
-        <button type="submit">Play</button>
-    </form> -->
-
-    <!-- <a href="/games/" id="play_btn">Play</a> -->
-
     <% lists.forEach(list => { %>
         <div class="list_item">
             <button type="button" class="select_item_btn" id="<%= list.id %>">select</button>

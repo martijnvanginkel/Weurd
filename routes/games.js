@@ -5,7 +5,6 @@ const Game = require('./../models/game');
 
 router.get('/results/:id', async (req, res) => {
     const game = await Game.findById(req.params.id);
-    console.log(game.words)
     res.render('games/result', { game: game });
 });
 
@@ -38,10 +37,7 @@ const makeGameFromList = async (list) => {
             passed: false
         });
     });
-
     game = await game.save();
-    console.log(`saved game: ${game}`);
-
     return game;
 }
 
