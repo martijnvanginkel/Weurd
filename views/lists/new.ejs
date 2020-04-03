@@ -3,13 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
     <title>Document</title>
 </head>
 <body>
-    <h1 class="main_title">new list</h1>
-    <form action="/lists" method="POST">
-        <%- include('_word_form') %>
-    </form>
+
+    <div class="container">
+
+        <%- include('../_header') %>
+
+        <h1 class="main_title">new list</h1>
+
+        <div class="list_container">
+
+            <form action="/lists" method="POST">
+                <%- include('_word_form') %>
+
+            </form>
+
+        </div>
+
+
+
+        <%- include('../_footer') %>
+
+    </div>
+
     <script src="/JS/UI.js"></script>
 </body>
 </html>

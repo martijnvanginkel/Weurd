@@ -41,16 +41,25 @@ body {
     flex-grow: 1;
 }
 
-footer {
-    background-color: blue;
-}
-
-
 .main_title {
     margin: 5px auto;
     padding: 5px;
     background-color: tomato;
     
+}
+
+.main_header {
+    background-color: orange;
+    display: flex;
+    justify-content: center;
+}
+
+.main_nav {
+    background-color: green;   
+}
+
+.main_footer {
+    background-color: blue;
 }
 
 #new_list_btn {
