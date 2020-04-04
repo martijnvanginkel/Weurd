@@ -7,14 +7,36 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>game</h1>
 
-    <label for="answer_input" id="answer_label"><%= word.word.langOne %></label>
-    <input type="hidden" id="word_id" value="<%= word.word._id %>">
-    <input type="hidden" id="game_id" value="<%= game.id %>">
-    <div id="cheat_div"></div>
-    <input type="text" class="" name="answer_input" value="" id="answer_input">
-    <button type="button" id="next_btn">Next</button>
+
+    <div class="container">
+
+        <%- include('../_header') %>
+
+        <h1 class="main_title">game</h1>
+
+
+        <div class="play_container">
+
+            <input type="hidden" id="word_id" value="<%= word.word._id %>">
+            <input type="hidden" id="game_id" value="<%= game.id %>"> 
+            
+            <label for="answer_input" id="answer_label"><%= word.word.langOne %></label>
+            <div class="answer_container">
+                <input type="text" class="" name="answer_input" value="" id="answer_input">
+                <button type="button" id="next_btn">Next</button>
+            </div>
+            <div id="cheat_div"></div>
+
+
+        </div>
+    
+
+        <%- include('../_footer') %>
+
+    </div>
+
+
    
     <script src="/JS/GameController.js"></script>
 </body>

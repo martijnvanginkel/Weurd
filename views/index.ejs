@@ -7,15 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-
+    
+    
     <div class="container">
-
+        
         <%- include('_header') %>
 
         <h1 class="main_title">index</h1>
-        <a href="/lists/new" id="new_list_btn">new list</a>
-    
+        
         <div class="list_container">
+            <a href="/lists/new" id="new_list_btn">new list</a>
 
             <% lists.forEach(list => { %>
                 <div class="list_item">
@@ -29,9 +30,9 @@
         </div>
 
         <%- include('_footer') %>
-
+        
     </div>
-
+    
             
     <script src="/JS/UI.js"></script>
 </body>

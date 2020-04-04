@@ -3,18 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
     <title>Document</title>
 </head>
 <body>
-    <h1>edit</h1>
 
-    <form action="/lists/<%= list.id %>?_method=PUT" method="POST">
-        <%- include('_word_form', { list: list }) %>
-        
-        <% list.words.forEach(word => { %>
-            <%- include('_word_field', { word: word }) %>
-        <% }) %>
-    </form>
+
+    <div class="container">
+
+        <%- include('../_header') %>
+
+        <h1 class="main_title">edit</h1>
+
+        <div class="word_container">
+
+
+            <form action="/lists/<%= list.id %>?_method=PUT" method="POST">
+                <%- include('_word_form', { list: list }) %>
+                
+                <% list.words.forEach(word => { %>
+                    <%- include('_word_field', { word: word }) %>
+                <% }) %>
+
+                <span id="insert_before"></span>
+            </form>
+
+        </div>
+
+
+        <%- include('../_footer') %>
+
+    </div>
 
     <script src="/JS/UI.js"></script>
 </body>

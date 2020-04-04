@@ -20,6 +20,7 @@ body {
     min-height: 100%;
     margin: 0 auto;
     max-width: 960px;
+
     background-color: pink;
 }
 
@@ -27,17 +28,50 @@ body {
     display: flex;
     flex-direction: column;  
     flex-grow: 1;
+    align-self: center;
+    width: 90%;
+    max-width: 640px;
     background-color: green;
 }
 
 .list_item {
     display: flex;
     flex-direction: row;
-    margin: 5px;
+    /* margin: 5px; */
     background-color: red;
 }
 
 .list_item_name {
+    flex-grow: 1;
+}
+
+.word_container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-self: center;
+    background-color: yellowgreen;
+}
+
+.play_container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 90%;
+    max-width: 480px;
+    align-self: center;
+
+    background-color: thistle;
+}
+
+.answer_container {
+    display: flex;
+    flex-direction: row;
+    
+    background-color: green;
+}
+
+#answer_input {
     flex-grow: 1;
 }
 
