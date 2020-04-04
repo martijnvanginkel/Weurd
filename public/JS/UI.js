@@ -20,57 +20,99 @@ const setNewLastField = (input) => {
     last_field.id = 'last_field';
     last_field.onkeyup = (e) => {
         e.preventDefault();
-        if (e.keyCode === 9) {
+        if (e.keyCode === 13) {
+            createNewWordField();
+            // return false;
             console.log('enter hit');
         }
-        console.log('key up');
+    }
+}
+
+const createNewWordField = () => {
+    const parent = document.querySelector('form');
+    const save_button = document.querySelector('#insert_before');
+    
+    for (let index = 0; index < 3; index++) {
+        const input = document.createElement('div');
+        input.className = 'word_field';
+        input.innerHTML = `
+            <label>langOne</label>
+            <input type="text" name="langOne" class="first_field">
+            <label>langTwo</label>
+            <input type="text" name="langTwo" class="second_field">
+            <button type="button" class="remove_word_btn">X</button>
+        `;
+        input.querySelector('.remove_word_btn').addEventListener('click', e => {
+            e.target.parentElement.remove()
+            if (input.querySelector('.second_field').id === 'last_field') {
+                setNewLastField(null);
+            }
+        });
+
+
+        input.querySelector('.second_field').onkeydown = (e) => {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+            }
+        }
+
+
+        parent.insertBefore(input, save_button);
+        if (index === 2) {
+            removeOldLastField();
+            setNewLastField(input);
+        }
     }
 }
 
 if (document.querySelector('#add_word_btn') !== null) {    
     document.querySelector('#add_word_btn').addEventListener('click', () => {
-        const parent = document.querySelector('form');
-        const save_button = document.querySelector('#insert_before');
+
+        createNewWordField();
+        // const parent = document.querySelector('form');
+        // const save_button = document.querySelector('#insert_before');
         
-        for (let index = 0; index < 3; index++) {
-            const input = document.createElement('div');
-            input.className = 'word_field';
-            input.innerHTML = `
-                <label>langOne</label>
-                <input type="text" name="langOne" class="first_field">
-                <label>langTwo</label>
-                <input type="text" name="langTwo" class="second_field">
-                <button type="button" class="remove_word_btn">X</button>
-            `;
-            input.querySelector('.remove_word_btn').addEventListener('click', e => {
-                if (input.querySelector('.second_field').id === 'last_field') {
-                    e.target.parentElement.remove()
-                    setNewLastField(null);
-                }
-            });
-            // input.querySelector('.second_field').keydown = (e) => {
-            //     e.preventDefault();
-            //     if (e.keyCode === 13) {
-            //         console.log('enter hit');
-            //         return false;
-            //     }
-            // }
-
-            parent.insertBefore(input, save_button);
-
-            if (index === 2) {
-                removeOldLastField();
-                setNewLastField(input);
-            }
-        }
+        // for (let index = 0; index < 3; index++) {
+        //     const input = document.createElement('div');
+        //     input.className = 'word_field';
+        //     input.innerHTML = `
+        //         <label>langOne</label>
+        //         <input type="text" name="langOne" class="first_field">
+        //         <label>langTwo</label>
+        //         <input type="text" name="langTwo" class="second_field">
+        //         <button type="button" class="remove_word_btn">X</button>
+        //     `;
+        //     input.querySelector('.remove_word_btn').addEventListener('click', e => {
+        //         if (input.querySelector('.second_field').id === 'last_field') {
+        //             e.target.parentElement.remove()
+        //             setNewLastField(null);
+        //         }
+        //     });
+        //     parent.insertBefore(input, save_button);
+        //     if (index === 2) {
+        //         removeOldLastField();
+        //         setNewLastField(input);
+        //     }
+        // }
     });
 }
 
 if (document.getElementById('save_list_btn') !== null) {
-    document.getElementById('save_list_btn').addEventListener('click', (e) => {
-        console.log('save list');
-        e.preventDefault();
-    });
+    document.getElementById('save_list_btn').addEventListener('click', e => {
+
+        //e.preventDefault();
+    }) 
+    //}
+        //addEventListener('submit', (e) => {
+    //     if (e.keyCode === 13) {
+    //         e.preventDefault();
+    //         return false;
+    //     }
+    //     // if (e.keyCode === 13) {
+    //     //     e.preventDefault();
+    //     // }
+    //     // e.preventDefault();
+    // });
 }
 
 const remove_word_btns = document.querySelectorAll('.remove_word_btn')
