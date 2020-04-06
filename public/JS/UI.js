@@ -1,63 +1,59 @@
 class InputRow {
     constructor() {
-        this.first_field = this.createFirstField();
-        this.second_field = this.createSecondField();
-        this.remove_button = this.createRemoveBtn();
         this.parent = this.createParent();
-        // console.log('asdf');
+        this.first_field = this.createTextField('langOne', 'first_field', () => this.second_field.select());
+        this.second_field = this.createTextField('langTwo', 'second_field', this.selectNextRow);
+        this.remove_button = this.createRemoveBtn();
+        this.next_row = null;
     }
 
     createParent() {
+        const form = document.querySelector('form');
         const input = document.createElement('div');
         
         input.className = 'word_field';
-        // input.innerHTML = `
-        //     <button type="button" class="remove_word_btn">X</button>
-        // `;
-        input.appendChild(this.first_field);
-        input.appendChild(this.second_field);
-        input.appendChild(this.remove_button);
-        console.log(input);
+        form.appendChild(input);
         return input;
     }
 
-    createFirstField() {
-        console.log('asdf');
-        const first_field = document.createElement('input');
-
-        first_field.type = 'text';
-        first_field.className = 'first_field';
-        first_field.name = 'langOne';
-        return first_field;
+    selectNextRow(current_row) {
+        if (current_row.next_row === null) {
+            current_row.next_row = new InputRow();
+        }
+        current_row.next_row.first_field.select();
     }
 
-    createSecondField() {
-        const second_field = document.createElement('input');
-        second_field.type = 'text';
-        second_field.className = 'second_field';
-        second_field.name = 'langTwo';
-        second_field.onkeydown = (e) => {
-            if (e.keyCode === 13)
+    createTextField(name, class_name, addEvent) {
+        const field = document.createElement('input');
+
+        field.type = 'text';
+        field.name = name;
+        field.className = class_name;
+        field.onkeydown = (e) => {
+            if (e.keyCode === 13) {
                 e.preventDefault();
+                addEvent(this);
+            }
         }
-        return second_field;
+        this.parent.appendChild(field);
+        return field;
     }
 
     createRemoveBtn() {
         const remove_button = document.createElement('button');
+
         remove_button.type = 'button';
         remove_button.className = 'remove_word_btn';
         remove_button.innerHTML = 'X';
         remove_button.addEventListener('click', e => {
-            input.remove();
+            this.parent.remove();
             if (second_field.id === 'last_field') {
                 setNewLastField(null);
             }
         })
+        this.parent.appendChild(remove_button);
         return remove_button;
     }
-
-
 }
 
 const removeOldLastField = () => {
@@ -69,40 +65,40 @@ const removeOldLastField = () => {
     }
 }
 
-const setNewLastField = (input) => {
-    let last_field;
+// const setNewLastField = (input) => {
+//     let last_field;
 
-    if (input !== null) {
-        last_field = input.querySelector('.second_field');
-    }
-    else {
-        const fields = document.querySelectorAll('.second_field');
-        last_field = fields[fields.length - 1];
-    }
-    last_field.id = 'last_field';
-    last_field.onkeyup = (e) => {
-        e.preventDefault();
-        if (e.keyCode === 13) {
-            createNewWordField();
-            // return false;
-            console.log('enter hit');
-        }
-    }
-    console.log(input.querySelector('.first_field').select());
-}
+//     if (input !== null) {
+//         last_field = input.querySelector('.second_field');
+//     }
+//     else {
+//         const fields = document.querySelectorAll('.second_field');
+//         last_field = fields[fields.length - 1];
+//     }
+//     last_field.id = 'last_field';
+//     // last_field.onkeyup = (e) => {
+//     //     e.preventDefault();
+//     //     if (e.keyCode === 13) {
+//     //         createNewWordField();
+//     //         // return false;
+//     //         console.log('enter hit');
+//     //     }
+//     // }
+//     console.log(input.querySelector('.first_field').select());
+// }
 
 // <input type="text" name="langOne" class="first_field">
 
 const createNewWordField = () => {
-    const form = document.querySelector('form');
-    const insert_before = document.querySelector('#insert_before');
+    // const form = document.querySelector('form');
+    // const insert_before = document.querySelector('#insert_before');
     
 
     const inputRow = new InputRow();
 
-    form.insertBefore(inputRow.parent, insert_before);
-    removeOldLastField();
-    setNewLastField(inputRow.parent);
+    // form.insertBefore(inputRow.parent, insert_before);
+    //removeOldLastField();
+    //setNewLastField(inputRow.parent);
 
 }
 
@@ -114,11 +110,11 @@ if (document.querySelector('#add_word_btn') !== null) {
     });
 }
 
-if (document.getElementById('save_list_btn') !== null) {
-    document.getElementById('save_list_btn').addEventListener('click', e => {
+// if (document.getElementById('save_list_btn') !== null) {
+//     document.getElementById('save_list_btn').addEventListener('click', e => {
 
-    }) 
-}
+//     }) 
+// }
 
 const remove_word_btns = document.querySelectorAll('.remove_word_btn')
 for (const button of remove_word_btns) {
@@ -141,11 +137,11 @@ for (const button of remove_list_btns) {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    if (document.querySelector('.word_container') !== null) {
-        const fields = document.querySelectorAll('.word_field');
-        if (fields !== null) {
-            setNewLastField(fields[fields.length - 1]);
-        }
-    }
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//     if (document.querySelector('.word_container') !== null) {
+//         const fields = document.querySelectorAll('.word_field');
+//         if (fields !== null) {
+//             setNewLastField(fields[fields.length - 1]);
+//         }
+//     }
+// });
