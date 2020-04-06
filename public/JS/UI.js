@@ -1,3 +1,5 @@
+const all_row_instances = [];
+
 class InputRow {
     constructor() {
         this.parent = this.createParent();
@@ -5,6 +7,7 @@ class InputRow {
         this.second_field = this.createTextField('langTwo', 'second_field', this.selectNextRow);
         this.remove_button = this.createRemoveBtn();
         this.next_row = null;
+        all_row_instances.push(this);
     }
 
     createParent() {
@@ -56,57 +59,27 @@ class InputRow {
     }
 }
 
-const removeOldLastField = () => {
-    const field = document.querySelector('#last_field');
-
-    if (field !== null) {
-        field.id = '';
-        field.onkeyup = null;
-    }
-}
-
-// const setNewLastField = (input) => {
-//     let last_field;
-
-//     if (input !== null) {
-//         last_field = input.querySelector('.second_field');
-//     }
-//     else {
-//         const fields = document.querySelectorAll('.second_field');
-//         last_field = fields[fields.length - 1];
-//     }
-//     last_field.id = 'last_field';
-//     // last_field.onkeyup = (e) => {
-//     //     e.preventDefault();
-//     //     if (e.keyCode === 13) {
-//     //         createNewWordField();
-//     //         // return false;
-//     //         console.log('enter hit');
-//     //     }
-//     // }
-//     console.log(input.querySelector('.first_field').select());
-// }
-
-// <input type="text" name="langOne" class="first_field">
-
-const createNewWordField = () => {
-    // const form = document.querySelector('form');
-    // const insert_before = document.querySelector('#insert_before');
+// const createNewWordField = () => {
+//     // const form = document.querySelector('form');
+//     // const insert_before = document.querySelector('#insert_before');
     
 
-    const inputRow = new InputRow();
+//     const inputRow = new InputRow();
+//     // all_instances.push(inputRow);
 
-    // form.insertBefore(inputRow.parent, insert_before);
-    //removeOldLastField();
-    //setNewLastField(inputRow.parent);
+//     // form.insertBefore(inputRow.parent, insert_before);
+//     //removeOldLastField();
+//     //setNewLastField(inputRow.parent);
 
-}
+// }
 
 if (document.querySelector('#add_word_btn') !== null) {    
     document.querySelector('#add_word_btn').addEventListener('click', () => {
-
-        createNewWordField();
-
+        const new_row = new InputRow();
+        if (all_row_instances.length > 1) {
+            all_row_instances[all_row_instances.length - 2].next_row = new_row;
+        }
+        all_row_instances.push(new_row);
     });
 }
 
