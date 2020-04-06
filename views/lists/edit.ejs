@@ -7,34 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-
-
     <div class="container">
-
         <%- include('../_header') %>
-
         <h1 class="main_title">edit</h1>
-
-        <div class="word_container">
-
-
-            <form action="/lists/<%= list.id %>?_method=PUT" method="POST">
+        <div class="word_container"> 
+            <form action="/lists/<%= list.id %>?_method=PUT" method="POST" id="edit_form">
                 <%- include('_word_form', { list: list }) %>
-                
-                <% list.words.forEach(word => { %>
-                    <%- include('_word_field', { word: word }) %>
-                <% }) %>
-
                 <span id="insert_before"></span>
             </form>
-
         </div>
-
-
         <%- include('../_footer') %>
-
     </div>
 
-    <script src="/JS/UI.js"></script>
+    <script type="module" src="/JS/EditList.js"></script>
 </body>
 </html>

@@ -1,13 +1,17 @@
 const all_row_instances = [];
 
 class InputRow {
-    constructor() {
+    constructor(first_value, second_value) {
         this.parent = this.createParent();
-        this.first_field = this.createTextField('langOne', 'first_field', () => this.second_field.select());
-        this.second_field = this.createTextField('langTwo', 'second_field', this.selectNextRow);
+        this.first_field = this.createTextField('langOne', 'first_field', first_value, () => this.second_field.select());
+        this.second_field = this.createTextField('langTwo', 'second_field', second_value, this.selectNextRow);
         this.remove_button = this.createRemoveBtn();
         this.next_row = null;
+
         all_row_instances.push(this);
+        if (all_row_instances.length > 1) {
+            all_row_instances[all_row_instances.length - 2].next_row = this;
+        }
     }
 
     createParent() {
@@ -26,7 +30,7 @@ class InputRow {
         current_row.next_row.first_field.select();
     }
 
-    createTextField(name, class_name, addEvent) {
+    createTextField(name, class_name, value, addEvent) {
         const field = document.createElement('input');
 
         field.type = 'text';
@@ -38,56 +42,33 @@ class InputRow {
                 addEvent(this);
             }
         }
+        value === undefined ? field.value = '' : field.value = value;
         this.parent.appendChild(field);
         return field;
     }
 
     createRemoveBtn() {
-        const remove_button = document.createElement('button');
+        const button = document.createElement('button');
 
-        remove_button.type = 'button';
-        remove_button.className = 'remove_word_btn';
-        remove_button.innerHTML = 'X';
-        remove_button.addEventListener('click', e => {
+        button.type = 'button';
+        button.className = 'remove_word_btn';
+        button.innerHTML = 'X';
+        button.addEventListener('click', e => {
             this.parent.remove();
             if (second_field.id === 'last_field') {
                 setNewLastField(null);
             }
         })
-        this.parent.appendChild(remove_button);
-        return remove_button;
+        this.parent.appendChild(button);
+        return button;
     }
 }
 
-// const createNewWordField = () => {
-//     // const form = document.querySelector('form');
-//     // const insert_before = document.querySelector('#insert_before');
-    
-
-//     const inputRow = new InputRow();
-//     // all_instances.push(inputRow);
-
-//     // form.insertBefore(inputRow.parent, insert_before);
-//     //removeOldLastField();
-//     //setNewLastField(inputRow.parent);
-
-// }
-
 if (document.querySelector('#add_word_btn') !== null) {    
     document.querySelector('#add_word_btn').addEventListener('click', () => {
-        const new_row = new InputRow();
-        if (all_row_instances.length > 1) {
-            all_row_instances[all_row_instances.length - 2].next_row = new_row;
-        }
-        all_row_instances.push(new_row);
+        new InputRow();
     });
 }
-
-// if (document.getElementById('save_list_btn') !== null) {
-//     document.getElementById('save_list_btn').addEventListener('click', e => {
-
-//     }) 
-// }
 
 const remove_word_btns = document.querySelectorAll('.remove_word_btn')
 for (const button of remove_word_btns) {
@@ -110,11 +91,4 @@ for (const button of remove_list_btns) {
     });
 }
 
-// document.addEventListener("DOMContentLoaded", () => {
-//     if (document.querySelector('.word_container') !== null) {
-//         const fields = document.querySelectorAll('.word_field');
-//         if (fields !== null) {
-//             setNewLastField(fields[fields.length - 1]);
-//         }
-//     }
-// });
+export default InputRow
