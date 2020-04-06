@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    
     <title>Document</title>
 </head>
 <body>
@@ -13,17 +14,17 @@
         
         <%- include('_header') %>
 
-        <h1 class="main_title">index</h1>
+        <h1 class="main_title">Lkmd</h1>
         
         <div class="list_container">
-            <a href="/lists/new" id="new_list_btn">new list</a>
+            <a href="/lists/new" class="basic_btn" id="new_list_btn">new list</a>
 
             <% lists.forEach(list => { %>
                 <div class="list_item">
                     <span class="list_item_name"><%= list.name %></span>
-                    <button type="button" class="remove_list_btn" value="<%= list.id %>">Remove</button>
-                    <a href="/lists/edit/<%= list.id %>">Edit</a>
-                    <a href="/games/<%= list.id %>" id="play_btn">Play</a>
+                    <button type="button" class="remove_list_btn" value="<%= list.id %>">remove</button>
+                    <a href="/lists/edit/<%= list.id %>" class="edit_list_btn">edit</a>
+                    <a href="/games/<%= list.id %>" class="play_list_btn" id="play_btn">play</a>
                 </div>
             <% }) %>
 

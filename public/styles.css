@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Indie+Flower);
+
 *  
     { 
     margin: 0; 
@@ -10,7 +12,9 @@ html, body {
 }
 
 body {
-    background-color: turquoise;
+    background-color: #FFFFFF;
+    background-color: pink;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .container {
@@ -21,7 +25,7 @@ body {
     margin: 0 auto;
     max-width: 960px;
 
-    background-color: pink;
+    /* background-color: white; */
 }
 
 .list_container {
@@ -38,7 +42,17 @@ body {
     display: flex;
     flex-direction: row;
     /* margin: 5px; */
-    background-color: red;
+    background-color: #FFFFFF;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 3px;
+    margin: 3px;
+    
+}
+
+.list_item:hover {
+    transition: ease;
+    background-color: #FFEDE6;
 }
 
 .list_item_name {
@@ -46,11 +60,55 @@ body {
 }
 
 .word_container {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     flex-grow: 1;
+    width: 90%;
+    max-width: 640px;
     align-self: center;
-    background-color: yellowgreen;
+    /* background-color: yellowgreen; */
+}
+
+.word_container_header {
+    display: flex;
+    flex-direction: row;
+    margin: 0 2px 10px 2px;
+}
+
+.word_field {
+    display: flex;
+    flex-direction: row;
+    /* flex-grow: 1; */
+    width: 100%;
+}
+
+.first_field, .second_field {
+    flex-grow: 1;
+    background-color: #FFFFFF;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 2px;
+    margin: 2px;
+    outline: none;
+}
+
+.remove_word_btn {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: 2px solid black;
+    border-radius: 4px;
+    margin: 2px 2px 2px 0px;
+    padding: 2px 4px 2px 4px;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    background-color: white;
+}
+
+.remove_word_btn:hover {
+    background-color: #FFEDE6;
+    transition: 0.1s;
+    cursor: pointer;
 }
 
 .play_container {
@@ -76,28 +134,83 @@ body {
 }
 
 .main_title {
+    font-family: 'Indie Flower', cursive;
     margin: 5px auto;
     padding: 5px;
-    background-color: tomato;
     
 }
 
 .main_header {
-    background-color: orange;
+    /* background-color: orange; */
     display: flex;
     justify-content: center;
 }
 
 .main_nav {
-    background-color: green;   
+    /* background-color: green;    */
 }
 
 .main_footer {
-    background-color: blue;
+    /* font-family: 'Indie Flower', cursive; */
+    /* background-color: blue; */
+    text-align: center;
+    font-size: 9px;
+    margin-bottom: 3px;
+}
+
+.main_footer a {
+    text-decoration: none;
+    color: black;
+}
+
+.main_footer a:hover {
+    color: grey;
+}
+
+.remove_list_btn {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    margin-right: 10px;
+}
+
+.edit_list_btn, .play_list_btn {
+    text-decoration: none;
+    color: black;
+    margin: 0 2px 0 5px;
 }
 
 #new_list_btn {
     align-self: flex-end;
+    /* background-color: #FFFFFF;
+    color: black;
+    border: 2px solid black;
+    border-radius: 4px;
+    text-decoration: none; */
+    /* padding: 3px; */
+    margin: 3px 3px 0 0;
+}
+
+.basic_btn {
+    background-color: #FFFFFF;
+    color: black;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 3px;
+    text-decoration: none;
+    outline: none;
+}
+
+.basic_btn:hover {
+    background-color: #FFEDE6;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+#new_list_btn:hover {
 }
 
 

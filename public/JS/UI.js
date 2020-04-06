@@ -84,16 +84,6 @@ if (document.querySelector('#add_word_btn') !== null) {
     });
 }
 
-// const remove_word_btns = document.querySelectorAll('.remove_word_btn')
-// for (const button of remove_word_btns) {
-//     button.addEventListener('click', e => {
-//         e.preventDefault();
-//         console.log(all_row_instances);
-//         e.target.parentElement.remove();
-//         console.log(all_row_instances);
-//     });  
-// }
-
 const remove_list_btns = document.querySelectorAll('.remove_list_btn')
 for (const button of remove_list_btns) {
     button.addEventListener('click', e => {
