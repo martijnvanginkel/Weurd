@@ -1,3 +1,41 @@
+class InputRow {
+    constructor() {
+        this.parent = this.createParent;
+        this.first_field = this.createFirstField;
+        this.second_field = this.createSecondField;
+    }
+
+    createParent() {
+        const input = document.createElement('div');
+        
+        input.className = 'word_field';
+        input.innerHTML = `
+            <button type="button" class="remove_word_btn">X</button>
+        `;
+        return input;
+    }
+
+    createFirstField() {
+        const first_field = document.createElement('input');
+
+        first_field.type = 'text';
+        first_field.className = 'first_field';
+        first_field.name = 'langOne';
+        return first_field;
+    }
+
+    createSecondField() {
+        const second_field = document.createElement('input');
+
+        second_field.type = 'text';
+        second_field.className = 'second_field';
+        second_field.name = 'langT';
+        return second_field;
+    }
+
+
+}
+
 const removeOldLastField = () => {
     const field = document.querySelector('#last_field');
 
@@ -26,93 +64,75 @@ const setNewLastField = (input) => {
             console.log('enter hit');
         }
     }
+    console.log(input.querySelector('.first_field').select());
 }
 
+// <input type="text" name="langOne" class="first_field">
+
 const createNewWordField = () => {
-    const parent = document.querySelector('form');
-    const save_button = document.querySelector('#insert_before');
+    const form = document.querySelector('form');
+    const insert_before = document.querySelector('#insert_before');
     
-    for (let index = 0; index < 3; index++) {
+
+    const inputRow = new InputRow();
+
+
+    // for (let index = 0; index < 3; index++) {
         const input = document.createElement('div');
+        
         input.className = 'word_field';
-        input.innerHTML = `
-            <label>langOne</label>
-            <input type="text" name="langOne" class="first_field">
-            <label>langTwo</label>
-            <input type="text" name="langTwo" class="second_field">
-            <button type="button" class="remove_word_btn">X</button>
-        `;
-        input.querySelector('.remove_word_btn').addEventListener('click', e => {
-            e.target.parentElement.remove()
-            if (input.querySelector('.second_field').id === 'last_field') {
+        // input.innerHTML = `
+        // <button type="button" class="remove_word_btn">X</button>
+        // `;
+
+        const first_field = document.createElement('input');
+        first_field.type = 'text';
+        first_field.className = 'first_field';
+        first_field.name = 'langOne';
+
+        const second_field = document.createElement('input');
+        second_field.type = 'text';
+        second_field.className = 'second_field';
+        second_field.name = 'langTwo';
+        second_field.onkeydown = (e) => {
+            if (e.keyCode === 13)
+                e.preventDefault();
+        }
+
+        const remove_button = document.createElement('button');
+        remove_button.type = 'button';
+        remove_button.className = 'remove_word_btn';
+        remove_button.innerHTML = 'X';
+        remove_button.addEventListener('click', e => {
+            input.remove();
+            if (second_field.id === 'last_field') {
                 setNewLastField(null);
             }
-        });
+        })
+
+        input.appendChild(first_field);
+        input.appendChild(second_field);
+        input.appendChild(remove_button);
 
 
-        input.querySelector('.second_field').onkeydown = (e) => {
-            if (e.keyCode === 13) {
-                e.preventDefault();
-            }
-        }
+        form.insertBefore(input, insert_before);
+        removeOldLastField();
+        setNewLastField(input);
 
-
-        parent.insertBefore(input, save_button);
-        if (index === 2) {
-            removeOldLastField();
-            setNewLastField(input);
-        }
-    }
 }
 
 if (document.querySelector('#add_word_btn') !== null) {    
     document.querySelector('#add_word_btn').addEventListener('click', () => {
 
         createNewWordField();
-        // const parent = document.querySelector('form');
-        // const save_button = document.querySelector('#insert_before');
-        
-        // for (let index = 0; index < 3; index++) {
-        //     const input = document.createElement('div');
-        //     input.className = 'word_field';
-        //     input.innerHTML = `
-        //         <label>langOne</label>
-        //         <input type="text" name="langOne" class="first_field">
-        //         <label>langTwo</label>
-        //         <input type="text" name="langTwo" class="second_field">
-        //         <button type="button" class="remove_word_btn">X</button>
-        //     `;
-        //     input.querySelector('.remove_word_btn').addEventListener('click', e => {
-        //         if (input.querySelector('.second_field').id === 'last_field') {
-        //             e.target.parentElement.remove()
-        //             setNewLastField(null);
-        //         }
-        //     });
-        //     parent.insertBefore(input, save_button);
-        //     if (index === 2) {
-        //         removeOldLastField();
-        //         setNewLastField(input);
-        //     }
-        // }
+
     });
 }
 
 if (document.getElementById('save_list_btn') !== null) {
     document.getElementById('save_list_btn').addEventListener('click', e => {
 
-        //e.preventDefault();
     }) 
-    //}
-        //addEventListener('submit', (e) => {
-    //     if (e.keyCode === 13) {
-    //         e.preventDefault();
-    //         return false;
-    //     }
-    //     // if (e.keyCode === 13) {
-    //     //     e.preventDefault();
-    //     // }
-    //     // e.preventDefault();
-    // });
 }
 
 const remove_word_btns = document.querySelectorAll('.remove_word_btn')
