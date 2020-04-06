@@ -1,21 +1,28 @@
 class InputRow {
     constructor() {
-        this.parent = this.createParent;
-        this.first_field = this.createFirstField;
-        this.second_field = this.createSecondField;
+        this.first_field = this.createFirstField();
+        this.second_field = this.createSecondField();
+        this.remove_button = this.createRemoveBtn();
+        this.parent = this.createParent();
+        // console.log('asdf');
     }
 
     createParent() {
         const input = document.createElement('div');
         
         input.className = 'word_field';
-        input.innerHTML = `
-            <button type="button" class="remove_word_btn">X</button>
-        `;
+        // input.innerHTML = `
+        //     <button type="button" class="remove_word_btn">X</button>
+        // `;
+        input.appendChild(this.first_field);
+        input.appendChild(this.second_field);
+        input.appendChild(this.remove_button);
+        console.log(input);
         return input;
     }
 
     createFirstField() {
+        console.log('asdf');
         const first_field = document.createElement('input');
 
         first_field.type = 'text';
@@ -26,11 +33,28 @@ class InputRow {
 
     createSecondField() {
         const second_field = document.createElement('input');
-
         second_field.type = 'text';
         second_field.className = 'second_field';
-        second_field.name = 'langT';
+        second_field.name = 'langTwo';
+        second_field.onkeydown = (e) => {
+            if (e.keyCode === 13)
+                e.preventDefault();
+        }
         return second_field;
+    }
+
+    createRemoveBtn() {
+        const remove_button = document.createElement('button');
+        remove_button.type = 'button';
+        remove_button.className = 'remove_word_btn';
+        remove_button.innerHTML = 'X';
+        remove_button.addEventListener('click', e => {
+            input.remove();
+            if (second_field.id === 'last_field') {
+                setNewLastField(null);
+            }
+        })
+        return remove_button;
     }
 
 
@@ -76,48 +100,9 @@ const createNewWordField = () => {
 
     const inputRow = new InputRow();
 
-
-    // for (let index = 0; index < 3; index++) {
-        const input = document.createElement('div');
-        
-        input.className = 'word_field';
-        // input.innerHTML = `
-        // <button type="button" class="remove_word_btn">X</button>
-        // `;
-
-        const first_field = document.createElement('input');
-        first_field.type = 'text';
-        first_field.className = 'first_field';
-        first_field.name = 'langOne';
-
-        const second_field = document.createElement('input');
-        second_field.type = 'text';
-        second_field.className = 'second_field';
-        second_field.name = 'langTwo';
-        second_field.onkeydown = (e) => {
-            if (e.keyCode === 13)
-                e.preventDefault();
-        }
-
-        const remove_button = document.createElement('button');
-        remove_button.type = 'button';
-        remove_button.className = 'remove_word_btn';
-        remove_button.innerHTML = 'X';
-        remove_button.addEventListener('click', e => {
-            input.remove();
-            if (second_field.id === 'last_field') {
-                setNewLastField(null);
-            }
-        })
-
-        input.appendChild(first_field);
-        input.appendChild(second_field);
-        input.appendChild(remove_button);
-
-
-        form.insertBefore(input, insert_before);
-        removeOldLastField();
-        setNewLastField(input);
+    form.insertBefore(inputRow.parent, insert_before);
+    removeOldLastField();
+    setNewLastField(inputRow.parent);
 
 }
 
