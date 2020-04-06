@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const Word = require('./word');
 
 const gameSchema = new mongoose.Schema({
+    name: {
+        type: String
+    },
     list_id: {
         type: String
     },

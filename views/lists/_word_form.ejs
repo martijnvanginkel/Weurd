@@ -1,8 +1,9 @@
 <div class="word_container_header">
-    div.
-    <button type="submit" class="basic_btn" id="save_list_btn">save</button>
-    <label for="name">name</label>
-    <input type="text" name="name" id="name" placeholder="name" value="<%= list.name %> ">
-    <button type="button" class="basic_btn" id="add_word_btn">Add field</button>
-    <a href="/" class="cancel_btn">Cancel</a>
+    <label for="name" id="list_name_label">name</label>
+    <input type="text" id="list_name" name="name" value="<%= list.name %>" required>
+    <div class="header_buttons">
+        <button type="submit" class="basic_btn" id="save_list_btn">save list</button>
+        <button type="button" class="basic_btn" id="add_word_btn">add field</button>
+        <a href="/" id="cancel_list_btn">Cancel</a>
+    </div>
 </div>

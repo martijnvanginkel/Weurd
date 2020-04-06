@@ -13,7 +13,7 @@
         <div class="word_container"> 
             <form action="/lists/<%= list.id %>?_method=PUT" method="POST" id="edit_form">
                 <%- include('_word_form', { list: list }) %>
-                <input type="text" id="list_id" hidden value="<%= list.id %>">
+                <input type="text" id="list_id" value="<%= list.id %>" hidden>
                 <span id="insert_before"></span>
             </form>
         </div>

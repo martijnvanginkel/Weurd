@@ -35,7 +35,6 @@ body {
     align-self: center;
     width: 90%;
     max-width: 640px;
-    background-color: green;
 }
 
 .list_item {
@@ -71,7 +70,7 @@ body {
 
 .word_container_header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin: 0 2px 10px 2px;
 }
 
@@ -92,6 +91,58 @@ body {
     outline: none;
 }
 
+#answer_input {
+    flex-grow: 0.8;
+    background-color: #FFFFFF;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 6px;
+    margin: 2px;
+    outline: none;
+    font-size:24px;
+}
+
+#next_btn {
+    flex-grow: 0.2;
+    margin: 2px;
+    font-size: 16pt;
+    text-align: center;
+}
+
+#answer_label {
+    margin: 0 0 2px 2px;
+    font-size: 1.5em;
+}
+
+#cheat_div {
+    margin: 2px 0 0px 5px;
+}
+
+/* #list_name_label {
+    margin: 0 0 0 2px;
+} */
+
+#list_name {
+    width: 50%;
+    flex-grow: 1;
+    background-color: #FFFFFF;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 2px;
+    margin: 3px 0 3px 0;
+    outline: none;
+}
+
+
+.header_buttons {
+    display: flex;
+    flex-direction: row;
+}
+#cancel_list_btn {
+    color:black;
+    padding: 3px;
+}
+
 .remove_word_btn {
     background-color: transparent;
     background-repeat: no-repeat;
@@ -102,6 +153,8 @@ body {
     cursor: pointer;
     overflow: hidden;
     outline: none;
+    /* font-size: 2vw;
+    text-align: center; */
     background-color: white;
 }
 
@@ -118,20 +171,14 @@ body {
     width: 90%;
     max-width: 480px;
     align-self: center;
-
-    background-color: thistle;
+    margin-top: 20px;
 }
 
 .answer_container {
     display: flex;
     flex-direction: row;
-    
-    background-color: green;
 }
 
-#answer_input {
-    flex-grow: 1;
-}
 
 .main_title {
     font-family: 'Indie Flower', cursive;
@@ -141,18 +188,10 @@ body {
 }
 
 .main_header {
-    /* background-color: orange; */
     display: flex;
     justify-content: center;
 }
-
-.main_nav {
-    /* background-color: green;    */
-}
-
 .main_footer {
-    /* font-family: 'Indie Flower', cursive; */
-    /* background-color: blue; */
     text-align: center;
     font-size: 9px;
     margin-bottom: 3px;
@@ -202,6 +241,7 @@ body {
     padding: 3px;
     text-decoration: none;
     outline: none;
+    margin-right: 4px;
 }
 
 .basic_btn:hover {
@@ -215,9 +255,9 @@ body {
 
 
 .red_alert {
-    background-color: red;
+    background-color: red !important;
 }
 
 .yellow_alert {
-    background-color: yellow;
+    background-color: yellow !important;
 }

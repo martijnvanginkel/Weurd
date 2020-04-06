@@ -78,6 +78,22 @@ class InputRow {
     }
 }
 
+const checkForEmptyList = () => {
+    document.querySelector('#save_list_btn').addEventListener('click', (e) => {
+        for (let i = 0; i < all_row_instances.length; i++) {
+            if (all_row_instances[i].first_field.value !== '' && all_row_instances[i].second_field.value !== '') {
+                return ;
+            }
+        }
+        e.preventDefault();
+    });
+}
+
+if (document.querySelector('#save_list_btn') !== null) {
+    checkForEmptyList();
+}
+
+
 if (document.querySelector('#add_word_btn') !== null) {    
     document.querySelector('#add_word_btn').addEventListener('click', () => {
         new InputRow();

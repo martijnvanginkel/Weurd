@@ -13,31 +13,21 @@
 
         <%- include('../_header') %>
 
-        <h1 class="main_title">game</h1>
-
-
+        <h1 class="main_title"><%= game.name %></h1>
         <div class="play_container">
-
             <input type="hidden" id="word_id" value="<%= word.word._id %>">
-            <input type="hidden" id="game_id" value="<%= game.id %>"> 
-            
+            <input type="hidden" id="game_id" value="<%= game.id %>">   
             <label for="answer_input" id="answer_label"><%= word.word.langOne %></label>
             <div class="answer_container">
                 <input type="text" class="" name="answer_input" value="" id="answer_input">
-                <button type="button" id="next_btn">Next</button>
+                <button type="button" class="basic_btn" id="next_btn">next</button>
             </div>
             <div id="cheat_div"></div>
-
-
         </div>
-    
-
         <%- include('../_footer') %>
-
     </div>
 
 
-   
     <script src="/JS/GameController.js"></script>
 </body>
 </html>

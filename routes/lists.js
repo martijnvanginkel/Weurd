@@ -41,6 +41,10 @@ function saveListAndRedirect(path) {
                 words.push(createNewWord(req.body.langOne[key], req.body.langTwo[key]));
             }
         }
+        // if (words.length === 0) {
+        //     console.log('emptyaf');
+        //     return ;
+        // }
         list.name = req.body.name;
         list.words = words;
         try {
