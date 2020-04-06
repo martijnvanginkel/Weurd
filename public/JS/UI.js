@@ -8,10 +8,18 @@ class InputRow {
         this.remove_button = this.createRemoveBtn();
         this.next_row = null;
 
+        this.addToList();
+    }
+
+    addToList() {
         all_row_instances.push(this);
         if (all_row_instances.length > 1) {
             all_row_instances[all_row_instances.length - 2].next_row = this;
         }
+    }
+
+    removeFromList() {
+        all_row_instances.splice(this);
     }
 
     createParent() {
@@ -54,10 +62,16 @@ class InputRow {
         button.className = 'remove_word_btn';
         button.innerHTML = 'X';
         button.addEventListener('click', e => {
-            this.parent.remove();
-            if (second_field.id === 'last_field') {
-                setNewLastField(null);
+            e.preventDefault();
+            for (let i = 0; i < all_row_instances.length; i++) {
+                if (all_row_instances[i] == this) {
+                    if (all_row_instances[i - 1] !== undefined && all_row_instances[i + 1] !== undefined) {
+                        all_row_instances[i - 1].next_row = all_row_instances[i + 1];
+                    }
+                    all_row_instances.splice(i, 1);
+                }
             }
+            e.target.parentElement.remove();
         })
         this.parent.appendChild(button);
         return button;
@@ -70,13 +84,15 @@ if (document.querySelector('#add_word_btn') !== null) {
     });
 }
 
-const remove_word_btns = document.querySelectorAll('.remove_word_btn')
-for (const button of remove_word_btns) {
-    button.addEventListener('click', e => {
-        e.preventDefault();
-        e.target.parentElement.remove();
-    });  
-}
+// const remove_word_btns = document.querySelectorAll('.remove_word_btn')
+// for (const button of remove_word_btns) {
+//     button.addEventListener('click', e => {
+//         e.preventDefault();
+//         console.log(all_row_instances);
+//         e.target.parentElement.remove();
+//         console.log(all_row_instances);
+//     });  
+// }
 
 const remove_list_btns = document.querySelectorAll('.remove_list_btn')
 for (const button of remove_list_btns) {
