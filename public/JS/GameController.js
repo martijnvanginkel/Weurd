@@ -54,3 +54,5 @@ document.querySelector('#answer_input').onkeyup = (e) => {
     }
 }
 
+document.addEventListener("DOMContentLoaded", () => document.querySelector('#answer_input').select());
+

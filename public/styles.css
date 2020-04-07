@@ -15,6 +15,7 @@ body {
     background-color: #FFFFFF;
     background-color: pink;
     font-family: 'Quicksand', sans-serif;
+    max-width: 100%;
 }
 
 .container {
@@ -24,8 +25,6 @@ body {
     min-height: 100%;
     margin: 0 auto;
     max-width: 960px;
-
-    /* background-color: white; */
 }
 
 .list_container {
@@ -40,13 +39,11 @@ body {
 .list_item {
     display: flex;
     flex-direction: row;
-    /* margin: 5px; */
     background-color: #FFFFFF;
     border: 2px solid black;
     border-radius: 4px;
     padding: 3px;
-    margin: 3px;
-    
+    margin: 3px;  
 }
 
 .list_item:hover {
@@ -59,13 +56,11 @@ body {
 }
 
 .word_container {
-    /* display: flex;
-    flex-direction: column; */
     flex-grow: 1;
     width: 90%;
     max-width: 640px;
     align-self: center;
-    /* background-color: yellowgreen; */
+    margin-top: 10px;
 }
 
 .word_container_header {
@@ -77,7 +72,6 @@ body {
 .word_field {
     display: flex;
     flex-direction: row;
-    /* flex-grow: 1; */
     width: 100%;
 }
 
@@ -92,20 +86,20 @@ body {
 }
 
 #answer_input {
-    flex-grow: 0.8;
+    flex-grow: 0.7;
     background-color: #FFFFFF;
     border: 2px solid black;
     border-radius: 4px;
     padding: 6px;
     margin: 2px;
     outline: none;
-    font-size:24px;
+    font-size: 1.75em;
 }
 
 #next_btn {
     flex-grow: 0.2;
     margin: 2px;
-    font-size: 16pt;
+    font-size: 1em;
     text-align: center;
 }
 
@@ -117,10 +111,6 @@ body {
 #cheat_div {
     margin: 2px 0 0px 5px;
 }
-
-/* #list_name_label {
-    margin: 0 0 0 2px;
-} */
 
 #list_name {
     width: 50%;
@@ -153,8 +143,6 @@ body {
     cursor: pointer;
     overflow: hidden;
     outline: none;
-    /* font-size: 2vw;
-    text-align: center; */
     background-color: white;
 }
 
@@ -177,6 +165,8 @@ body {
 .answer_container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 100%;
 }
 
 
@@ -193,7 +183,7 @@ body {
 }
 .main_footer {
     text-align: center;
-    font-size: 9px;
+    font-size: 0.6em;
     margin-bottom: 3px;
 }
 
@@ -224,12 +214,6 @@ body {
 
 #new_list_btn {
     align-self: flex-end;
-    /* background-color: #FFFFFF;
-    color: black;
-    border: 2px solid black;
-    border-radius: 4px;
-    text-decoration: none; */
-    /* padding: 3px; */
     margin: 3px 3px 0 0;
 }
 
@@ -250,14 +234,27 @@ body {
     cursor: pointer;
 }
 
-#new_list_btn:hover {
-}
-
-
 .red_alert {
     background-color: red !important;
 }
 
 .yellow_alert {
     background-color: yellow !important;
+}
+
+table {
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+th {
+    text-align: left;
+    font-weight: italic;
+}
+
+td {
+    padding-top: 2px;
 }
