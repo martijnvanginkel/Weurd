@@ -1,7 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Indie+Flower);
 
-*  
-    { 
+*  { 
     margin: 0; 
     padding: 0; 
     border: 0; 
@@ -23,8 +22,8 @@ body {
     flex-direction: column;
     height: 100%;
     min-height: 100%;
-    margin: 0 auto;
     max-width: 960px;
+    margin: 0 auto;
 }
 
 .list_container {
@@ -40,10 +39,10 @@ body {
     display: flex;
     flex-direction: row;
     background-color: #FFFFFF;
-    border: 2px solid black;
-    border-radius: 4px;
     padding: 3px;
     margin: 3px;  
+    border: 2px solid black;
+    border-radius: 4px;
 }
 
 .list_item:hover {
@@ -123,7 +122,6 @@ body {
     outline: none;
 }
 
-
 .header_buttons {
     display: flex;
     flex-direction: row;
@@ -169,31 +167,15 @@ body {
     max-width: 100%;
 }
 
-
 .main_title {
     font-family: 'Indie Flower', cursive;
     margin: 5px auto;
-    padding: 5px;
-    
+    padding: 5px;  
 }
 
 .main_header {
     display: flex;
     justify-content: center;
-}
-.main_footer {
-    text-align: center;
-    font-size: 0.6em;
-    margin-bottom: 3px;
-}
-
-.main_footer a {
-    text-decoration: none;
-    color: black;
-}
-
-.main_footer a:hover {
-    color: grey;
 }
 
 .remove_list_btn {
@@ -234,14 +216,6 @@ body {
     cursor: pointer;
 }
 
-.red_alert {
-    background-color: red !important;
-}
-
-.yellow_alert {
-    background-color: yellow !important;
-}
-
 table {
     border: 2px solid black;
     border-radius: 4px;
@@ -257,4 +231,27 @@ th {
 
 td {
     padding-top: 2px;
+}
+
+.main_footer {
+    text-align: center;
+    font-size: 0.6em;
+    margin-bottom: 3px;
+}
+
+.main_footer a {
+    text-decoration: none;
+    color: black;
+}
+
+.main_footer a:hover {
+    color: grey;
+}
+
+.red_alert {
+    background-color: red !important;
+}
+
+.yellow_alert {
+    background-color: yellow !important;
 }

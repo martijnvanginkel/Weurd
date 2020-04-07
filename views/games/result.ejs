@@ -7,25 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-
     <div class="container">
-
         <%- include('../_header') %>
-
         <h1 class="main_title">result</h1>
-        
         <div class="word_container">
-          
           <a href="/" class="basic_btn">Back</a>
           <a href="/games/<%= game.list_id %>" class="basic_btn">Retry</a>
-
           <table>
               <tr>
                 <th>Word</th>
                 <th>Translation</th>
                 <th>Retries</th>
               </tr>
-
               <% game.words.forEach(word => { %>
                   <tr>       
                     <td><%= word.word.langOne %></td>
@@ -33,11 +26,8 @@
                     <td><%= word.retries %></td>
                   </tr>
               <% }) %>
-
             </table>
-
         </div>
-
         <%- include('../_footer') %>
     </div>
 </body>

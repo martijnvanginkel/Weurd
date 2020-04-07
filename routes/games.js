@@ -24,9 +24,7 @@ router.get('/:id', async (req, res) => {
 });
 
 const makeGameFromList = async (list) => {
-
     let game = new Game();
-
     game.name = list.name;
     game.list_id = list.id;
     game.direction = true;

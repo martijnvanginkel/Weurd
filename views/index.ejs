@@ -3,22 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    
+    <link rel="stylesheet" href="styles.css">  
     <title>Document</title>
 </head>
-<body>
-    
-    
-    <div class="container">
-        
+<body>  
+    <div class="container">   
         <%- include('_header') %>
-
-        <h1 class="main_title">Lkmd</h1>
-        
+        <h1 class="main_title">Lkmd</h1>  
         <div class="list_container">
             <a href="/lists/new" class="basic_btn" id="new_list_btn">new list</a>
-
             <% lists.forEach(list => { %>
                 <div class="list_item">
                     <span class="list_item_name"><%= list.name %></span>
@@ -27,14 +20,9 @@
                     <a href="/games/<%= list.id %>" class="play_list_btn">play</a>
                 </div>
             <% }) %>
-
         </div>
-
-        <%- include('_footer') %>
-        
-    </div>
-    
-            
+        <%- include('_footer') %> 
+    </div>       
     <script type="module" src="/JS/UI.js"></script>
 </body>
 </html>

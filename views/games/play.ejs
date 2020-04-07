@@ -7,12 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-
-
     <div class="container">
-
         <%- include('../_header') %>
-
         <h1 class="main_title"><%= game.name %></h1>
         <div class="play_container">
             <input type="hidden" id="word_id" value="<%= word.word._id %>">
@@ -26,8 +22,6 @@
         </div>
         <%- include('../_footer') %>
     </div>
-
-
     <script src="/JS/GameController.js"></script>
 </body>
 </html>

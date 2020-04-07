@@ -7,7 +7,6 @@ class InputRow {
         this.second_field = this.createTextField('langTwo', 'second_field', second_value, this.selectNextRow);
         this.remove_button = this.createRemoveBtn();
         this.next_row = null;
-
         this.addToList();
     }
 
